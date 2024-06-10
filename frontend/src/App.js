@@ -8,6 +8,7 @@ import AppHeader from "./Components/AppHeader";
 import LeftNav from "./Components/LeftNav";
 import ChatHeader from "./Components/ChatHeader";
 import ChatBody from "./Components/ChatBody";
+import Attachment from "./Components/Attachment";
 import Logo from "./Assets/Logo.svg";
 
 function App() {
@@ -28,8 +29,13 @@ function App() {
               <Grid item>
                 <ChatHeader />
               </Grid>
-              <Grid item>
-                <ChatBody />
+              <Grid container item direction="row" alignItems="flex-end">
+                {/* <Grid item xs={2} md={2}>
+                  <Attachment />
+                </Grid> */}
+                <Grid item xs={10} md={10}>
+                  <ChatBody />
+                </Grid>     
               </Grid>
             </Grid>
           </Grid>
