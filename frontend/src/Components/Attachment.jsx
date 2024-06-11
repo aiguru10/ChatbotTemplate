@@ -22,10 +22,18 @@ function Attachment({ onFileUploadComplete }) {
       const response = await axios.post(chat_API, formData);
       console.log(JSON.stringify(response.data));
       setUploadStatus("File uploaded successfully!");
-      onFileUploadComplete(file);
+      onFileUploadComplete(file, "File page limit check succeeded.");
     } catch (error) {
       console.error(error);
-      setUploadStatus("Error uploading file.");
+      if (error.response && error.response.status === 413) {
+        setUploadStatus("Error: Payload Too Large");
+        onFileUploadComplete(file, "File size limit exceeded.");
+      } else if (error.code === 'ERR_NETWORK') {
+        setUploadStatus("Network Error");
+        onFileUploadComplete(file, "Network Error. Please try again later.");
+      } else {
+        setUploadStatus("Error uploading file.");
+      }
     } finally {
       setUploading(false);
     }

@@ -27,10 +27,7 @@ function ChatBody() {
     getBotResponse(setMessageList, setProcessing, message);
   };
 
-  const handleFileUploadComplete = async (file) => {
-    const fileSizeLimit = 5 * 1024 * 1024; // 5 MB limit
-    const fileStatus = file.size <= fileSizeLimit ? "File page limit check succeeded." : "File size limit exceeded.";
-
+  const handleFileUploadComplete = (file, fileStatus) => {
     const newMessageBlock = createMessageBlock(
       `File uploaded: ${file.name}`,
       "USER",
@@ -41,19 +38,21 @@ function ChatBody() {
     );
     setMessageList((prevList) => [...prevList, newMessageBlock]);
 
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate processing time
-
-    const botMessageBlock = createMessageBlock(
-      fileStatus === "File page limit check succeeded."
-        ? "Checking file size."
-        : "File size limit exceeded. Please upload a smaller file.",
-      "BOT",
-      "FILE",
-      "RECEIVED",
-      file.name,
-      fileStatus
-    );
-    setMessageList((prevList) => [...prevList, botMessageBlock]);
+    setTimeout(() => {
+      const botMessageBlock = createMessageBlock(
+        fileStatus === "File page limit check succeeded."
+          ? "Checking file size."
+          : fileStatus === "File size limit exceeded."
+          ? "File size limit exceeded. Please upload a smaller file."
+          : "Network Error. Please try again later.",
+        "BOT",
+        "FILE",
+        "RECEIVED",
+        file.name,
+        fileStatus
+      );
+      setMessageList((prevList) => [...prevList, botMessageBlock]);
+    }, 1000); // Simulate processing time
   };
 
   return (

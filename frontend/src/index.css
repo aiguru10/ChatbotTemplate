@@ -187,14 +187,21 @@ p#USERCHATINPUT-helper-text {
 
 /* for bot file check reply */
 
-/* styles.css */
-
-@keyframes backgroundTransition {
+@keyframes backgroundTransitionGreen {
   0% {
     background-color: #E1EBFF; /* Initial blue color */
   }
   100% {
     background-color: green; /* Final green color */
+  }
+}
+
+@keyframes backgroundTransitionRed {
+  0% {
+    background-color: #E1EBFF; /* Initial blue color */
+  }
+  100% {
+    background-color: red; /* Final red color */
   }
 }
 
@@ -229,8 +236,15 @@ p#USERCHATINPUT-helper-text {
 }
 
 .file-status-box.success {
-  animation: backgroundTransition 1s forwards;
+  animation: backgroundTransitionGreen 1s forwards;
   background-color: green;
   color: white;
 }
+
+.file-status-box.fail {
+  animation: backgroundTransitionRed 1s forwards;
+  background-color: red;
+  color: white;
+}
+
 

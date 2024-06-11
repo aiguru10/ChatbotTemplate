@@ -3,7 +3,7 @@ import { Grid, Avatar, Typography, CircularProgress } from '@mui/material';
 import BotAvatar from '../Assets/BotAvatar.svg';
 import PdfIcon from '../Assets/pdf_logo.svg';
 
-function BotFileCheckReply({ message, fileName, fileStatus, messageType }) {
+function BotFileCheckReply({ message, fileName, fileStatus }) {
   const messageAlignment = 'flex-start';
   const messageBgColor = '#E1EBFF';
 
@@ -11,13 +11,15 @@ function BotFileCheckReply({ message, fileName, fileStatus, messageType }) {
 
   useEffect(() => {
     let timeout;
-    if (animationState === 'checking' && fileStatus === 'File page limit check succeeded.') {
-      timeout = setTimeout(() => setAnimationState('success'), 1000);
+    if (animationState === 'checking') {
+      if (fileStatus === 'File page limit check succeeded.') {
+        timeout = setTimeout(() => setAnimationState('success'), 1000);
+      } else if (fileStatus === 'File size limit exceeded.' || fileStatus === 'Network Error. Please try again later.') {
+        timeout = setTimeout(() => setAnimationState('fail'), 1000);
+      }
     }
     return () => clearTimeout(timeout);
   }, [animationState, fileStatus]);
-
-  const isFileUploadSuccess = fileStatus === 'File page limit check succeeded.';
 
   return (
     <Grid container direction="row" justifyContent={messageAlignment} alignItems="center">
@@ -31,15 +33,20 @@ function BotFileCheckReply({ message, fileName, fileStatus, messageType }) {
               <img src={PdfIcon} alt="PDF Icon" style={{ width: 40, height: 40, borderRadius: '50%' }} />
               <Typography>{fileName}</Typography>
             </div>
-            <div className={`file-status-box ${animationState === 'success' ? 'success' : ''}`}>
+            <div className={`file-status-box ${animationState}`}>
               <Typography>
-                {animationState === 'checking' ? 'Checking file size...' : 'File page limit check succeeded.'}
+                {animationState === 'checking' ? 'Checking file size...' : fileStatus}
               </Typography>
               {animationState === 'checking' && <CircularProgress size={24} className="loading" />}
             </div>
-            {isFileUploadSuccess && animationState === 'success' && (
-              <Typography style={{ marginTop: '4px'}}>
+            {animationState === 'success' && (
+              <Typography style={{ marginTop: '4px', color: 'green' }}>
                 File uploaded successfully
+              </Typography>
+            )}
+            {animationState === 'fail' && (
+              <Typography style={{ marginTop: '4px', color: 'red' }}>
+                {fileStatus}
               </Typography>
             )}
           </div>
