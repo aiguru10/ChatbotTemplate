@@ -1,16 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Container, TextField, Grid, Avatar, IconButton } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+import { Container, Grid, Avatar } from "@mui/material";
 import Attachment from "./Attachment";
-import BotFileCheckReply from "./BotFileCheck";
+import ChatInput from "./ChatInput";
+import BotFileCheckReply from "./BotFileCheckReply";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import createMessageBlock from "../utilities/createMessageBlock"; // Import this if it's defined elsewhere
 
 function ChatBody() {
-  const [message, setMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [processing, setProcessing] = useState(false);
-  const [helperText, setHelperText] = useState("");
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -23,15 +21,10 @@ function ChatBody() {
     }
   };
 
-  const handleSendMessage = () => {
-    if (message.trim() !== "") {
-      const newMessageBlock = createMessageBlock(message, "USER", "TEXT", "SENT");
-      setMessageList([...messageList, newMessageBlock]);
-      setMessage("");
-      getBotResponse(setMessageList, setProcessing, message);
-    } else {
-      setHelperText("Cannot send empty message");
-    }
+  const handleSendMessage = (message) => {
+    const newMessageBlock = createMessageBlock(message, "USER", "TEXT", "SENT");
+    setMessageList([...messageList, newMessageBlock]);
+    getBotResponse(setMessageList, setProcessing, message);
   };
 
   const handleFileUploadComplete = async (file) => {
@@ -103,36 +96,7 @@ function ChatBody() {
           <Grid container item xs={2} sx={{ mt: 2 }}>
             <Attachment onFileUploadComplete={handleFileUploadComplete} />
           </Grid>
-          <Grid container item xs={10} alignItems="center" className="sendMessageContainer">
-            <Grid item xs={11.5}>
-              <TextField
-                multiline
-                maxRows={4}
-                fullWidth
-                id="USERCHATINPUT"
-                value={message}
-                onChange={(event) => {
-                  if (helperText) {
-                    setHelperText("");
-                  }
-                  setMessage(event.target.value);
-                }}
-                helperText={helperText}
-                sx={{
-                  "& fieldset": { border: "none" },
-                }}
-              />
-            </Grid>
-            <Grid item xs={0.5}>
-              <IconButton
-                aria-label="send"
-                disabled={processing}
-                onClick={handleSendMessage}
-              >
-                <SendIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
+          <ChatInput onSendMessage={handleSendMessage} processing={processing} />
         </Grid>
       </Grid>
     </Container>
