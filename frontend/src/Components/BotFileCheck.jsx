@@ -1,11 +1,13 @@
 import React from 'react';
-import { Grid, Avatar, Typography } from '@mui/material';
+import { Grid, Avatar, Typography, CircularProgress } from '@mui/material';
 import BotAvatar from '../Assets/BotAvatar.svg';
 import PdfIcon from '../Assets/pdf_logo.svg';
 
 function BotFileCheckReply({ message, fileName, fileStatus, messageType }) {
   const messageAlignment = 'flex-start';
   const messageBgColor = '#E1EBFF';
+
+  const isFileUploadSuccess = fileStatus === "File page limit check succeeded.";
 
   return (
     <Grid container direction="row" justifyContent={messageAlignment} alignItems="center">
@@ -23,9 +25,13 @@ function BotFileCheckReply({ message, fileName, fileStatus, messageType }) {
             <Typography style={{ border: '1px solid #75787B', borderRadius: '1rem', padding: '4px 12px', marginTop: '4px', fontStyle: 'italic' }}>
               {fileStatus}
             </Typography>
-            <Typography style={{ marginTop: '4px' }}>
-              File uploaded successfully
-            </Typography>
+            {isFileUploadSuccess ? (
+              <Typography style={{ marginTop: '4px', color: 'green' }}>
+                File uploaded successfully
+              </Typography>
+            ) : (
+              <CircularProgress size={24} style={{ marginTop: '4px' }} />
+            )}
           </div>
         ) : (
           <Typography>{message}</Typography>

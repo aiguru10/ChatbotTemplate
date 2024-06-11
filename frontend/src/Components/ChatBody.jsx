@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Container, TextField, Grid, Avatar, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import createMessageBlock from "../utilities/createMessageBlock";
 import Attachment from "./Attachment";
 import BotFileCheckReply from "./BotFileCheck";
 import UserAvatar from "../Assets/UserAvatar.svg";
+import createMessageBlock from "../utilities/createMessageBlock"; // Import this if it's defined elsewhere
 
 function ChatBody() {
   const [message, setMessage] = useState("");
@@ -34,12 +34,12 @@ function ChatBody() {
     }
   };
 
-  const handleFileUploadComplete = (file) => {
+  const handleFileUploadComplete = async (file) => {
     const fileSizeLimit = 5 * 1024 * 1024; // 5 MB limit
     const fileStatus = file.size <= fileSizeLimit ? "File page limit check succeeded." : "File size limit exceeded.";
-    
+
     const newMessageBlock = createMessageBlock(
-      "File uploaded: " + file.name,
+      `File uploaded: ${file.name}`,
       "USER",
       "FILE",
       "SENT",
@@ -48,19 +48,19 @@ function ChatBody() {
     );
     setMessageList((prevList) => [...prevList, newMessageBlock]);
 
-    setTimeout(() => {
-      const botMessageBlock = createMessageBlock(
-        fileStatus === "File page limit check succeeded." 
-          ? "Checking file size."
-          : "File size limit exceeded. Please upload a smaller file.",
-        "BOT",
-        "FILE",
-        "RECEIVED",
-        file.name,
-        fileStatus
-      );
-      setMessageList((prevList) => [...prevList, botMessageBlock]);
-    }, 1000);
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate processing time
+
+    const botMessageBlock = createMessageBlock(
+      fileStatus === "File page limit check succeeded."
+        ? "Checking file size."
+        : "File size limit exceeded. Please upload a smaller file.",
+      "BOT",
+      "FILE",
+      "RECEIVED",
+      file.name,
+      fileStatus
+    );
+    setMessageList((prevList) => [...prevList, botMessageBlock]);
   };
 
   return (
@@ -79,7 +79,7 @@ function ChatBody() {
           {messageList.map((msg, index) => (
             <Grid item xs={12} key={index}>
               {msg.sentBy === "USER" ? (
-                <UserReply message={msg.message} state={msg.state} />
+                <UserReply message={msg.message} />
               ) : (
                 <BotFileCheckReply
                   message={msg.message}
