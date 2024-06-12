@@ -4,7 +4,7 @@
  * @param {string} message - The content of the message.
  * @param {string} sentBy - The sender of the message ('USER' or 'BOT').
  * @param {string} [type='TEXT'] - The type of the message ('TEXT' or 'FILE').
- * @param {string} [state='PROCESSING'] - The state of the message ('PROCESSING' or 'RECEIVED' or 'SENT').
+ * @param {string} [state='PROCESSING'] - The state of the message ('PROCESSING' or 'RECEIVED' or 'SENT' or 'STREAMING').
  * @param {string} [fileName=''] - The name of the file (if type is 'FILE').
  * @param {string} [fileStatus=''] - The status of the file (if type is 'FILE').
  * @returns {Object} - A message block object.
@@ -16,7 +16,7 @@ const createMessageBlock = (message, sentBy, type = "TEXT", state = "PROCESSING"
   // Valid message types
   const validTypes = ["TEXT", "FILE"];
   // Valid message states
-  const validStates = ["PROCESSING", "RECEIVED", "SENT"];
+  const validStates = ["PROCESSING", "RECEIVED", "SENT", "STREAMING"];
 
   // Validate the 'sentBy' parameter
   if (!validSenders.includes(sentBy)) {
@@ -30,7 +30,7 @@ const createMessageBlock = (message, sentBy, type = "TEXT", state = "PROCESSING"
 
   // Validate the 'state' parameter
   if (!validStates.includes(state)) {
-    throw new Error("Invalid state. Must be 'PROCESSING' or 'RECEIVED' or 'SENT'.");
+    throw new Error("Invalid state. Must be 'PROCESSING', 'RECEIVED', 'SENT', or 'STREAMING'.");
   }
 
   // Return the message block object

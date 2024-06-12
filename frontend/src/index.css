@@ -181,7 +181,7 @@ p#USERCHATINPUT-helper-text {
   font-weight: 600;
 }
 .chatScrollContainer {
-  max-height: 65vh;
+  height:  65vh;
   overflow-y: auto; /* Changed from "overflow: auto" to "overflow-y: auto" */
 }
 

@@ -24,7 +24,7 @@ function App() {
             <Grid item xs={showLeftNav ? 3 : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.default }}>
               <LeftNav showLeftNav={showLeftNav} setLeftNav={setLeftNav} />
             </Grid>
-            <Grid container item xs={showLeftNav ? 9 : 11.5} direction="column" justifyContent="space-between" alignItems="stretch" className="appWidth100" sx={{ padding: "1.5rem" }}>
+            <Grid container item xs={showLeftNav ? 9 : 11.5} direction="column" justifyContent="flex-start" alignItems="stretch" className="appWidth100" sx={{ padding: "1.5rem" }}>
               <Grid item>
                 <ChatHeader />
               </Grid>

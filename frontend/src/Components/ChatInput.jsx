@@ -37,7 +37,12 @@ function ChatInput({ onSendMessage, processing }) {
           fullWidth
           id="USERCHATINPUT"
           value={message}
-          onChange={handleTyping}
+          onKeyDown={(e) => {
+            if (e.key === "Enter")
+                handleSendMessage();
+            }}
+                      
+            onChange={handleTyping}
           helperText={helperText}
           sx={{
             "& fieldset": { border: "none" },

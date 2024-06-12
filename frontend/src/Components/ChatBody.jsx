@@ -4,7 +4,8 @@ import Attachment from "./Attachment";
 import ChatInput from "./ChatInput";
 import BotFileCheckReply from "./BotFileCheckReply";
 import UserAvatar from "../Assets/UserAvatar.svg";
-import createMessageBlock from "../utilities/createMessageBlock"; // Import this if it's defined elsewhere
+import StreamingResponse from "./StreamingResponse"; // Import StreamingResponse component
+import createMessageBlock from "../utilities/createMessageBlock";
 
 function ChatBody() {
   const [messageList, setMessageList] = useState([]);
@@ -72,6 +73,8 @@ function ChatBody() {
             <Grid item xs={12} key={index}>
               {msg.sentBy === "USER" ? (
                 <UserReply message={msg.message} />
+              ) : msg.sentBy === "BOT" && msg.state === "PROCESSING" ? (
+                <StreamingResponse initialMessage={msg.message} />
               ) : (
                 <BotFileCheckReply
                   message={msg.message}
@@ -131,17 +134,6 @@ const getBotResponse = (setMessageList, setProcessing, message) => {
     "PROCESSING"
   );
   setMessageList((prevList) => [...prevList, botMessageBlock]);
-  setTimeout(() => {
-    setMessageList((prevList) => {
-      const updatedList = [...prevList];
-      const lastMessageIndex = updatedList.length - 1;
-      updatedList[lastMessageIndex] = {
-        ...updatedList[lastMessageIndex],
-        message: "Here's the information you requested.",
-        state: "RECEIVED",
-      };
-      setProcessing(false);
-      return updatedList;
-    });
-  }, 3000);
+  setProcessing(false);
+  // WebSocket connection and handling will be done by the StreamingResponse component
 };
