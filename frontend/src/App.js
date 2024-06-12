@@ -24,12 +24,12 @@ function App() {
             <Grid item xs={showLeftNav ? 3 : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.default }}>
               <LeftNav showLeftNav={showLeftNav} setLeftNav={setLeftNav} />
             </Grid>
-            <Grid container item xs={showLeftNav ? 9 : 11.5} direction="column" justifyContent="flex-start" alignItems="stretch" className="appWidth100" sx={{ padding: "1.5rem" }}>
+            <Grid container item xs={showLeftNav ? 9 : 11.5} direction="column" justifyContent="flex-start" alignItems="stretch" className="appWidth100 appHeight100" sx={{ padding: "1.5rem" }}>
               <Grid item>
                 <ChatHeader />
               </Grid>
-              <Grid container item direction="row" alignItems="flex-end">
-                <Grid item xs={10} md={10}>
+              <Grid container item direction="row" alignItems="flex-end" sx={{height: "calc(100% - 2.625rem)"}}>
+                <Grid  className="appHeight100" item xs={10} md={10}>
                   <ChatBody />
                 </Grid>     
               </Grid>

@@ -127,7 +127,7 @@ code {
 
 .MuiGrid-root.MuiGrid-item.userMessage {
   margin-right: 0.5rem;
-  text-align: end;
+  text-align: start;
   padding: 10px !important;
   max-width: 75%;
   background: #f5f7fa;
@@ -148,6 +148,7 @@ code {
 .MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer {
   padding: 0px 24px;
   margin-top: 1rem;
+  /* margin-left: 1rem; */
   border-radius: 40px;
 }
 .MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer, .MuiButton-root.attachmentButton 
@@ -180,9 +181,31 @@ p#USERCHATINPUT-helper-text {
   font-style: normal;
   font-weight: 600;
 }
+/* Base styles for .chatScrollContainer */
 .chatScrollContainer {
-  height:  65vh;
-  overflow-y: auto; /* Changed from "overflow: auto" to "overflow-y: auto" */
+  max-height: 69vh;
+  overflow-y: auto;
+}
+
+/* Media query for tablets and smaller screens (e.g., iPads) */
+@media (max-width: 1024px) {
+  .chatScrollContainer {
+    max-height: 70vh; /* Adjust the max-height as needed */
+  }
+}
+
+/* Media query for phones and smaller screens (e.g., iPhones, Android phones) */
+@media (max-width: 768px) {
+  .chatScrollContainer {
+    max-height: 75vh; /* Adjust the max-height as needed */
+  }
+}
+
+/* Media query for very small phones (e.g., small Android phones, older iPhones) */
+@media (max-width: 480px) {
+  .chatScrollContainer {
+    max-height: 80vh; /* Adjust the max-height as needed */
+  }
 }
 
 /* for bot file check reply */

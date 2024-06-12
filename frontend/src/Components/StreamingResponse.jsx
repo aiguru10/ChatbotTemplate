@@ -57,7 +57,7 @@ const StreamingMessage = ({ initialMessage }) => {
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
       <Grid item className="botMessage" >
-        <Typography>
+        <Typography variant='body2'>
           {responses.join('')}
         </Typography>
         {!completed && <CircularProgress size={24} className="loading" />}

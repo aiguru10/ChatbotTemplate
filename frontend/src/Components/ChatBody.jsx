@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Container, Grid, Avatar } from "@mui/material";
+import { Container, Grid, Avatar, Typography } from "@mui/material";
 import Attachment from "./Attachment";
 import ChatInput from "./ChatInput";
 import BotFileCheckReply from "./BotFileCheckReply";
@@ -57,14 +57,14 @@ function ChatBody() {
   };
 
   return (
-    <Container maxWidth="md">
-      <Grid container spacing={2}>
+    <Container maxWidth="md" className="appHeight100">
+      <Grid container spacing={2} justifyContent={"space-between"} className="appHeight100" sx={{mt:4}}>
         <Grid
           container
           spacing={3}
           direction="row"
-          justifyContent="flex-end"
-          alignItems="stretch"
+          // justifyContent="flex-end"
+          // alignItems="stretch"
           item
           xs={12}
           className="chatScrollContainer"
@@ -90,10 +90,12 @@ function ChatBody() {
         <Grid
           item
           xs={12}
+          // spacing={2}
           container
           direction="row"
-          justifyContent="flex-start"
-          alignItems="center"
+          justifyContent="space-between"
+          alignItems="end"
+          sx={{mb: 10}}
         >
           <Grid container item xs={2} sx={{ mt: 2 }}>
             <Attachment onFileUploadComplete={handleFileUploadComplete} />
@@ -116,7 +118,8 @@ function UserReply({ message }) {
       alignItems="flex-end"
     >
       <Grid item className="userMessage">
-        {message}
+      <Typography variant='body2'>
+        {message}</Typography>
       </Grid>
       <Grid item>
         <Avatar alt={"User Profile Pic"} src={UserAvatar} />
