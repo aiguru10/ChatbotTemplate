@@ -8,7 +8,6 @@ import AppHeader from "./Components/AppHeader";
 import LeftNav from "./Components/LeftNav";
 import ChatHeader from "./Components/ChatHeader";
 import ChatBody from "./Components/ChatBody";
-import Logo from "./Assets/Logo.svg";
 
 function App() {
   const [showLeftNav, setLeftNav] = useState(true);

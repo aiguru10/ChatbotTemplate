@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+<<<<<<< Updated upstream
 import { Container, Grid, Avatar } from "@mui/material";
 import Attachment from "./Attachment";
+=======
+import { Container, Grid, Avatar, Typography } from "@mui/material";
+>>>>>>> Stashed changes
 import ChatInput from "./ChatInput";
-import BotFileCheckReply from "./BotFileCheckReply";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import createMessageBlock from "../utilities/createMessageBlock"; // Import this if it's defined elsewhere
 
@@ -27,43 +30,23 @@ function ChatBody() {
     getBotResponse(setMessageList, setProcessing, message);
   };
 
-  const handleFileUploadComplete = (file, fileStatus) => {
-    const newMessageBlock = createMessageBlock(
-      `File uploaded: ${file.name}`,
-      "USER",
-      "FILE",
-      "SENT",
-      file.name,
-      fileStatus
-    );
-    setMessageList((prevList) => [...prevList, newMessageBlock]);
-
-    setTimeout(() => {
-      const botMessageBlock = createMessageBlock(
-        fileStatus === "File page limit check succeeded."
-          ? "Checking file size."
-          : fileStatus === "File size limit exceeded."
-          ? "File size limit exceeded. Please upload a smaller file."
-          : "Network Error. Please try again later.",
-        "BOT",
-        "FILE",
-        "RECEIVED",
-        file.name,
-        fileStatus
-      );
-      setMessageList((prevList) => [...prevList, botMessageBlock]);
-    }, 1000); // Simulate processing time
-  };
-
   return (
+<<<<<<< Updated upstream
     <Container maxWidth="md">
       <Grid container spacing={2}>
+=======
+    <Container maxWidth="md" className="appHeight100">
+      <Grid container spacing={2} justifyContent={"space-between"} className="appHeight100" sx={{ mt: 4 }}>
+>>>>>>> Stashed changes
         <Grid
           container
           spacing={3}
           direction="row"
+<<<<<<< Updated upstream
           justifyContent="flex-end"
           alignItems="stretch"
+=======
+>>>>>>> Stashed changes
           item
           xs={12}
           className="chatScrollContainer"
@@ -71,14 +54,13 @@ function ChatBody() {
           {messageList.map((msg, index) => (
             <Grid item xs={12} key={index}>
               {msg.sentBy === "USER" ? (
+<<<<<<< Updated upstream
                 <UserReply message={msg.message} />
+=======
+                <UserReply message={msg.message} state={msg.state} />
+>>>>>>> Stashed changes
               ) : (
-                <BotFileCheckReply
-                  message={msg.message}
-                  fileName={msg.fileName}
-                  fileStatus={msg.fileStatus}
-                  messageType={msg.sentBy === "USER" ? "user_doc_upload" : "bot_response"}
-                />
+                <StreamingResponse initialMessage={msg.message} />
               )}
             </Grid>
           ))}
@@ -89,12 +71,15 @@ function ChatBody() {
           xs={12}
           container
           direction="row"
+<<<<<<< Updated upstream
           justifyContent="flex-start"
           alignItems="center"
+=======
+          justifyContent="space-between"
+          alignItems="end"
+          sx={{ mb: 10 }}
+>>>>>>> Stashed changes
         >
-          <Grid container item xs={2} sx={{ mt: 2 }}>
-            <Attachment onFileUploadComplete={handleFileUploadComplete} />
-          </Grid>
           <ChatInput onSendMessage={handleSendMessage} processing={processing} />
         </Grid>
       </Grid>
@@ -113,7 +98,11 @@ function UserReply({ message }) {
       alignItems="flex-end"
     >
       <Grid item className="userMessage">
+<<<<<<< Updated upstream
         {message}
+=======
+        <Typography variant='body2'>{message}</Typography>
+>>>>>>> Stashed changes
       </Grid>
       <Grid item>
         <Avatar alt={"User Profile Pic"} src={UserAvatar} />
@@ -125,7 +114,7 @@ function UserReply({ message }) {
 const getBotResponse = (setMessageList, setProcessing, message) => {
   setProcessing(true);
   const botMessageBlock = createMessageBlock(
-    "Processing your request...",
+    message,
     "BOT",
     "TEXT",
     "PROCESSING"

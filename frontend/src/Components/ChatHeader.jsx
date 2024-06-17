@@ -1,5 +1,4 @@
 import React from "react";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { CHAT_HEADER_TITLE } from "../utilities/constants";
 import { Container } from "@mui/material";

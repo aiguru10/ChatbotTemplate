@@ -130,7 +130,7 @@ code {
   text-align: end;
   padding: 10px !important;
   max-width: 75%;
-  background: #f5f7fa;
+  background: #FFEFCA;
   border-radius: 8px;
   flex: none;
 }
@@ -140,7 +140,7 @@ code {
   text-align: start;
   padding: 10px !important;
   max-width: 75%;
-  background: #e1ebff;
+  background: #f5f7fa;
   border-radius: 8px;
   flex: none;
 }
@@ -173,7 +173,7 @@ p#USERCHATINPUT-helper-text {
 }
 .MuiTypography-h4.chatHeaderText {
   text-align: center;
-  background: linear-gradient(89.84deg, #00205a 19.48%, #5e97ff 47.28%);
+  background: linear-gradient(89.84deg, #4A4A4A 19.48%, #E7B00C 47.28%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

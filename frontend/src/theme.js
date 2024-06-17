@@ -4,15 +4,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#00205A", // Banner Health blue
-      50: "#BFD5FE",
-      70: "#E6EFFE",
+      main: "#E7B00C", // Kelvin yellow
+      50: "#FFFFF0",
+      70: "#FFFFFF",
     },
     background: {
-      default: "#F5F8FE",
+      default: "#E7B00C",
     },
     secondary: {
-      main: "#8DC7E8",
+      main: "#000000",
     },
   },
 });
