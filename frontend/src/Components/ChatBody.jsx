@@ -137,7 +137,7 @@ const getBotResponse = (setMessageList, setProcessing, message) => {
       const lastMessageIndex = updatedList.length - 1;
       updatedList[lastMessageIndex] = {
         ...updatedList[lastMessageIndex],
-        message: "Here's the information you requested.",
+        message: message,
         state: "RECEIVED",
       };
       setProcessing(false);
