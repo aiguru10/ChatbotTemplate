@@ -130,7 +130,7 @@ code {
   text-align: start;
   padding: 10px !important;
   max-width: 75%;
-  background: #f5f7fa;
+  /* background: #f5f7fa; */
   border-radius: 8px;
   flex: none;
 }
@@ -140,7 +140,7 @@ code {
   text-align: start;
   padding: 10px !important;
   max-width: 75%;
-  background: #e1ebff;
+  /* background: #e1ebff; */
   border-radius: 8px;
   flex: none;
 }
@@ -151,9 +151,9 @@ code {
   /* margin-left: 1rem; */
   border-radius: 40px;
 }
-.MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer, .MuiButton-root.attachmentButton 
-  {
-  background: #f5f8fe;
+.MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer,
+.MuiButton-root.attachmentButton {
+  background: #f4f4f4;
 }
 
 .MuiButton-root.attachmentButton {
@@ -173,8 +173,7 @@ p#USERCHATINPUT-helper-text {
   padding-bottom: 12px;
 }
 .MuiTypography-h4.chatHeaderText {
-  text-align: center;
-  background: linear-gradient(89.84deg, #00205a 19.48%, #5e97ff 47.28%);
+  text-align: start;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -183,36 +182,14 @@ p#USERCHATINPUT-helper-text {
 }
 /* Base styles for .chatScrollContainer */
 .chatScrollContainer {
-  max-height: 69vh;
   overflow-y: auto;
-}
-
-/* Media query for tablets and smaller screens (e.g., iPads) */
-@media (max-width: 1024px) {
-  .chatScrollContainer {
-    max-height: 70vh; /* Adjust the max-height as needed */
-  }
-}
-
-/* Media query for phones and smaller screens (e.g., iPhones, Android phones) */
-@media (max-width: 768px) {
-  .chatScrollContainer {
-    max-height: 75vh; /* Adjust the max-height as needed */
-  }
-}
-
-/* Media query for very small phones (e.g., small Android phones, older iPhones) */
-@media (max-width: 480px) {
-  .chatScrollContainer {
-    max-height: 80vh; /* Adjust the max-height as needed */
-  }
 }
 
 /* for bot file check reply */
 
 @keyframes backgroundTransitionGreen {
   0% {
-    background-color: #E1EBFF; /* Initial blue color */
+    background-color: #e1ebff; /* Initial blue color */
   }
   100% {
     background-color: green; /* Final green color */
@@ -221,7 +198,7 @@ p#USERCHATINPUT-helper-text {
 
 @keyframes backgroundTransitionRed {
   0% {
-    background-color: #E1EBFF; /* Initial blue color */
+    background-color: #e1ebff; /* Initial blue color */
   }
   100% {
     background-color: red; /* Final red color */
@@ -243,12 +220,12 @@ p#USERCHATINPUT-helper-text {
   height: 24px;
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  border-top-color: #75787B;
+  border-top-color: #75787b;
   animation: loadingSpinner 1s linear infinite;
 }
 
 .file-status-box {
-  border: 1px solid #75787B;
+  border: 1px solid #75787b;
   border-radius: 1rem;
   padding: 4px 12px;
   margin-top: 4px;
@@ -269,5 +246,3 @@ p#USERCHATINPUT-helper-text {
   background-color: red;
   color: white;
 }
-
-

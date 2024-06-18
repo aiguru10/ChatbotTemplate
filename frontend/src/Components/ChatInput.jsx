@@ -5,16 +5,13 @@ import SendIcon from "@mui/icons-material/Send";
 function ChatInput({ onSendMessage, processing }) {
   const [message, setMessage] = useState("");
   const [helperText, setHelperText] = useState("");
-  const [iconColor, setIconColor] = useState('primary'); // Initial custom color
 
   // Function to handle typing event
   const handleTyping = (event) => {
     if (helperText) {
       setHelperText("");
-      
     }
     setMessage(event.target.value);
-    setIconColor('secondary');
   };
 
   // Function to handle send message
@@ -22,14 +19,13 @@ function ChatInput({ onSendMessage, processing }) {
     if (message.trim() !== "") {
       onSendMessage(message);
       setMessage("");
-      setIconColor('primary'); // Revert back to initial color
     } else {
       setHelperText("Cannot send empty message");
     }
   };
 
   return (
-    <Grid container item xs={10} alignItems="center" className="sendMessageContainer">
+    <Grid container item xs={12} alignItems="center" className="sendMessageContainer">
       <Grid item xs={11.5}>
         <TextField
           multiline
@@ -38,11 +34,9 @@ function ChatInput({ onSendMessage, processing }) {
           id="USERCHATINPUT"
           value={message}
           onKeyDown={(e) => {
-            if (e.key === "Enter")
-                handleSendMessage();
-            }}
-                      
-            onChange={handleTyping}
+            if (e.key === "Enter") handleSendMessage();
+          }}
+          onChange={handleTyping}
           helperText={helperText}
           sx={{
             "& fieldset": { border: "none" },
@@ -54,7 +48,8 @@ function ChatInput({ onSendMessage, processing }) {
           aria-label="send"
           disabled={processing}
           onClick={handleSendMessage}
-          style={{ color: iconColor }} // Use custom color
+          // iconColor
+          color={message.trim() !== "" ? "primary" : "default"}
         >
           <SendIcon />
         </IconButton>
