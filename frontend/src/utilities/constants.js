@@ -1,7 +1,15 @@
 // constants.js
-export const APP_NAME = "Kelvin Park";
-export const APP_ASSISTANT_NAME = "Kelvin Park GenAI Bot";
-export const ABOUT_US = "Welcome to the Kelvin Park GenAI chat bot! We're here to assist to  quickly access relevant information";
-export const FAQS = ["Is it possible to get a copy of my test results from my previous visit?", "Could you please provide the name of the medication.", "I forgot the details of my last appointment. How can I retrieve them?", "How can I access my medical records from previous visits?"];
-export const CHAT_HEADER_TITLE = "Kelvin Park AI Chat Assistant";
-export const chat_API = 'https://v1npsugq9g.execute-api.us-west-2.amazonaws.com/dev/upload';
+export const APP_NAME = "Kelvyn Park";
+export const APP_ASSISTANT_NAME = "Kelvyn Park GenAI Bot";
+export const ABOUT_US = "Welcome to the Kelvyn Park GenAI chat bot! We're here to assist to  quickly access relevant information";
+export const FAQS = [
+    "What are the school hours?",
+    "How do I find out my class schedule?",
+    "What is the policy for missing a class?",
+    "How can I get involved in extracurricular activities?",
+    "Who do I contact if I need academic help?"
+  ];
+  
+export const CHAT_HEADER_TITLE = "Kelvyn Park AI Chat Assistant";
+export const CHAT_INPUT_PLACEHOLDER = "Type a Query...";
+export const websocket_API = 'wss://p41tv6njhg.execute-api.us-west-2.amazonaws.com/production/';

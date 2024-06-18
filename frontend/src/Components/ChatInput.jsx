@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import "../utilities/constants.js";
+import { CHAT_INPUT_PLACEHOLDER } from "../utilities/constants.js";
 
 function ChatInput({ onSendMessage, processing }) {
   const [message, setMessage] = useState("");
@@ -11,7 +13,6 @@ function ChatInput({ onSendMessage, processing }) {
   const handleTyping = (event) => {
     if (helperText) {
       setHelperText("");
-      
     }
     setMessage(event.target.value);
     setIconColor('secondary');
@@ -35,8 +36,15 @@ function ChatInput({ onSendMessage, processing }) {
           multiline
           maxRows={4}
           fullWidth
+          placeholder={CHAT_INPUT_PLACEHOLDER}
           id="USERCHATINPUT"
           value={message}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault(); // Prevents a newline from being added
+              handleSendMessage();
+            }
+          }}
           onChange={handleTyping}
           helperText={helperText}
           sx={{

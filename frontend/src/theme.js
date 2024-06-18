@@ -2,6 +2,9 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: 'Lato, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+  },
   palette: {
     primary: {
       main: "#E7B00C", // Kelvin yellow

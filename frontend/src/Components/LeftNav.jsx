@@ -19,14 +19,14 @@ function LeftNav({ showLeftNav = true, setLeftNav }) {
                   onClick={() => setLeftNav(false)} // Removed extra parentheses
                 />
               </Grid>
-              <Grid item>
-                <Typography variant="h6">About us</Typography>
+              <Grid item >
+                <Typography  variant="h6" sx={{fontWeight:"bold"}} color={"white"}>About us</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="subtitle1">{ABOUT_US}</Typography>
+                <Typography variant="subtitle1" >{ABOUT_US}</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h6">Frequently Asked Questions</Typography>
+                <Typography variant="h6" sx={{fontWeight:"bold"}} color={"white"}>Frequently Asked Questions</Typography>
               </Grid>
               <Grid item>
                 <ul>

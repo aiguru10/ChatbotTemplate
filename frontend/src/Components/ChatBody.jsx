@@ -1,14 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
-<<<<<<< Updated upstream
-import { Container, Grid, Avatar } from "@mui/material";
-import Attachment from "./Attachment";
-=======
 import { Container, Grid, Avatar, Typography } from "@mui/material";
->>>>>>> Stashed changes
 import ChatInput from "./ChatInput";
 import UserAvatar from "../Assets/UserAvatar.svg";
-import createMessageBlock from "../utilities/createMessageBlock"; // Import this if it's defined elsewhere
-
+import createMessageBlock from "../utilities/createMessageBlock"; 
+import StreamingResponse from "./StreamingResponse"; 
 function ChatBody() {
   const [messageList, setMessageList] = useState([]);
   const [processing, setProcessing] = useState(false);
@@ -31,22 +26,12 @@ function ChatBody() {
   };
 
   return (
-<<<<<<< Updated upstream
-    <Container maxWidth="md">
-      <Grid container spacing={2}>
-=======
     <Container maxWidth="md" className="appHeight100">
       <Grid container spacing={2} justifyContent={"space-between"} className="appHeight100" sx={{ mt: 4 }}>
->>>>>>> Stashed changes
         <Grid
           container
           spacing={3}
           direction="row"
-<<<<<<< Updated upstream
-          justifyContent="flex-end"
-          alignItems="stretch"
-=======
->>>>>>> Stashed changes
           item
           xs={12}
           className="chatScrollContainer"
@@ -54,11 +39,7 @@ function ChatBody() {
           {messageList.map((msg, index) => (
             <Grid item xs={12} key={index}>
               {msg.sentBy === "USER" ? (
-<<<<<<< Updated upstream
-                <UserReply message={msg.message} />
-=======
                 <UserReply message={msg.message} state={msg.state} />
->>>>>>> Stashed changes
               ) : (
                 <StreamingResponse initialMessage={msg.message} />
               )}
@@ -71,14 +52,9 @@ function ChatBody() {
           xs={12}
           container
           direction="row"
-<<<<<<< Updated upstream
-          justifyContent="flex-start"
-          alignItems="center"
-=======
-          justifyContent="space-between"
+          justifyContent="flex-end"
           alignItems="end"
           sx={{ mb: 10 }}
->>>>>>> Stashed changes
         >
           <ChatInput onSendMessage={handleSendMessage} processing={processing} />
         </Grid>
@@ -98,11 +74,7 @@ function UserReply({ message }) {
       alignItems="flex-end"
     >
       <Grid item className="userMessage">
-<<<<<<< Updated upstream
-        {message}
-=======
         <Typography variant='body2'>{message}</Typography>
->>>>>>> Stashed changes
       </Grid>
       <Grid item>
         <Avatar alt={"User Profile Pic"} src={UserAvatar} />
