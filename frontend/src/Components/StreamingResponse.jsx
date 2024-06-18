@@ -27,11 +27,14 @@ const StreamingMessage = ({ initialMessage }) => {
           setResponses((prev) => [...prev, parsedData.text]);
         }
         messageBuffer.current = ""; // Clear buffer on successful parse
+        if (parsedData.type === "end") {
+          setCompleted(true);
+        }
       } catch (e) {
         if (e instanceof SyntaxError) {
           console.log("Received incomplete JSON, waiting for more data...");
         } else {
-          console.error("Error processing message:", e);
+          console.error("Error processing message: ", e);
           messageBuffer.current = ""; // Clear buffer if error is not related to JSON parsing
         }
       }
@@ -52,7 +55,7 @@ const StreamingMessage = ({ initialMessage }) => {
   }, [initialMessage]);
 
   return (
-    <Grid container direction="row" justifyContent="flex-start" alignItems="center">
+    <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
