@@ -127,10 +127,10 @@ code {
 
 .MuiGrid-root.MuiGrid-item.userMessage {
   margin-right: 0.5rem;
-  text-align: end;
+  text-align: start;
   padding: 10px !important;
   max-width: 75%;
-  background: #f5f7fa;
+  /* background: #f5f7fa; */
   border-radius: 8px;
   flex: none;
 }
@@ -140,7 +140,7 @@ code {
   text-align: start;
   padding: 10px !important;
   max-width: 75%;
-  background: #e1ebff;
+  /* background: #e1ebff; */
   border-radius: 8px;
   flex: none;
 }
@@ -148,22 +148,101 @@ code {
 .MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer {
   padding: 0px 24px;
   margin-top: 1rem;
-  background: #f5f8fe;
+  /* margin-left: 1rem; */
   border-radius: 40px;
 }
+.MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer,
+.MuiButton-root.attachmentButton {
+  background: #f4f4f4;
+}
+
+.MuiButton-root.attachmentButton {
+  border-radius: 50%;
+  margin-left: 8px;
+  padding: 0.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
 p#USERCHATINPUT-helper-text {
   padding-bottom: 12px;
 }
 .MuiTypography-h4.chatHeaderText {
-  text-align: center;
-  background: linear-gradient(89.84deg, #00205a 19.48%, #5e97ff 47.28%);
+  text-align: start;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-style: normal;
   font-weight: 600;
 }
+/* Base styles for .chatScrollContainer */
 .chatScrollContainer {
-  max-height: 65vh;
-  overflow-y: auto; /* Changed from "overflow: auto" to "overflow-y: auto" */
+  overflow-y: auto;
+}
+
+/* for bot file check reply */
+
+@keyframes backgroundTransitionGreen {
+  0% {
+    background-color: #e1ebff; /* Initial blue color */
+  }
+  100% {
+    background-color: green; /* Final green color */
+  }
+}
+
+@keyframes backgroundTransitionRed {
+  0% {
+    background-color: #e1ebff; /* Initial blue color */
+  }
+  100% {
+    background-color: red; /* Final red color */
+  }
+}
+
+@keyframes loadingSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: #75787b;
+  animation: loadingSpinner 1s linear infinite;
+}
+
+.file-status-box {
+  border: 1px solid #75787b;
+  border-radius: 1rem;
+  padding: 4px 12px;
+  margin-top: 4px;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-status-box.success {
+  animation: backgroundTransitionGreen 1s forwards;
+  background-color: green;
+  color: white;
+}
+
+.file-status-box.fail {
+  animation: backgroundTransitionRed 1s forwards;
+  background-color: red;
+  color: white;
 }
