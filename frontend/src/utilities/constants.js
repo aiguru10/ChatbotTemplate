@@ -27,10 +27,10 @@ export const TEXT = {
       FAQ_TITLE: "Frequently Asked Questions",
       FAQS: [
         "What are the school hours?",
-        "How do I find out my class schedule?",
-        "What is the policy for missing a class?",
-        "How can I get involved in extracurricular activities?",
-        "Who do I contact if I need academic help?"
+        "What core values does the school have?",
+        "What academic programs are offered?",
+        "What sports are offered at the school?",
+        "How do I get involved in the school?"
       ],
       CHAT_HEADER_TITLE: "Kelvyn Park AI Chat Assistant",
       CHAT_INPUT_PLACEHOLDER: "Type a Query...",
@@ -44,17 +44,17 @@ export const TEXT = {
       FAQ_TITLE: "Preguntas frecuentes",
       FAQS: [
         "¿Cuáles son los horarios escolares?",
-        "¿Cómo puedo averiguar mi horario de clases?",
-        "¿Cuál es la política para faltar a clase?",
-        "¿Cómo puedo participar en actividades extracurriculares?",
-        "¿A quién contacto si necesito ayuda académica?"
+        "¿Cuáles son los valores fundamentales de la escuela?",
+        "¿Qué programas académicos se ofrecen?",
+        "¿Qué deportes se ofrecen en la escuela?",
+        "¿Cómo puedo involucrarme en la escuela?"
       ],
       CHAT_HEADER_TITLE: "Asistente de Chat AI de Kelvyn Park",
       CHAT_INPUT_PLACEHOLDER: "Escribe una consulta...",
       HELPER_TEXT: "No se puede enviar un mensaje vacío",
     }
   };
-
+  
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
 
@@ -66,4 +66,4 @@ export const WEBSOCKET_API = "wss://p41tv6njhg.execute-api.us-west-2.amazonaws.c
 // --------------------------------------------------------------------------------------------------------//
 
 // Features
-export const ALLOW_FILE_UPLOAD = false;
+export const ALLOW_FILE_UPLOAD = true;
