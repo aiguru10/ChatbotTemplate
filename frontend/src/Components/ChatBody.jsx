@@ -78,27 +78,6 @@ function UserReply({ message }) {
     </Grid>
   );
 }
-// const getBotResponse = (setMessageList, setProcessing, message) => {
-//   setProcessing(true);
-//   const botMessageBlock = createMessageBlock(message, "BOT", "TEXT", "PROCESSING");
-//   setMessageList((prevList) => {
-//     console.log(prevList);
-//     return [...prevList, botMessageBlock];
-//   });
-//   setTimeout(() => {
-//     setMessageList((prevList) => {
-//       const updatedList = [...prevList];
-//       const lastMessageIndex = updatedList.length - 1;
-//       updatedList[lastMessageIndex] = {
-//         ...updatedList[lastMessageIndex],
-//         message:message,
-//         state: "RECEIVED",
-//       };
-//       setProcessing(false);
-//       return updatedList;
-//     });
-//   }, 3000);
-// };
 
 const getBotResponse = (setMessageList, setProcessing, message) => {
   setProcessing(true);

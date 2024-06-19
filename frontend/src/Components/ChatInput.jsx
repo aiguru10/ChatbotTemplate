@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import "../utilities/constants.js";
-import { CHAT_INPUT_PLACEHOLDER } from "../utilities/constants.js";
+import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
+import { TEXT } from "../utilities/constants"; // Adjust the import path
 
 function ChatInput({ onSendMessage, processing }) {
   const [message, setMessage] = useState("");
   const [helperText, setHelperText] = useState("");
+  const { language } = useLanguage();
 
   // Function to handle typing event
   const handleTyping = (event) => {
@@ -22,7 +23,7 @@ function ChatInput({ onSendMessage, processing }) {
       onSendMessage(message);
       setMessage("");
     } else {
-      setHelperText("Cannot send empty message");
+      setHelperText(TEXT[language].HELPER_TEXT); // Add helper text in constants
     }
   };
 
@@ -33,7 +34,7 @@ function ChatInput({ onSendMessage, processing }) {
           multiline
           maxRows={4}
           fullWidth
-          placeholder={CHAT_INPUT_PLACEHOLDER}
+          placeholder={TEXT[language].CHAT_INPUT_PLACEHOLDER}
           id="USERCHATINPUT"
           value={message}
           onKeyDown={(e) => {
@@ -54,7 +55,6 @@ function ChatInput({ onSendMessage, processing }) {
           aria-label="send"
           disabled={processing}
           onClick={handleSendMessage}
-          // iconColor
           color={message.trim() !== "" ? "primary" : "default"}
         >
           <SendIcon />

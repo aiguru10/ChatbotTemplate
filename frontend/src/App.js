@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import theme from "./theme"; // Import your theme
 import { ThemeProvider } from "@mui/material/styles"; // Import ThemeProvider
-
 import Grid from "@mui/material/Grid";
 import AppHeader from "./Components/AppHeader";
 import LeftNav from "./Components/LeftNav";
 import ChatHeader from "./Components/ChatHeader";
 import ChatBody from "./Components/ChatBody";
+import { LanguageProvider } from "./utilities/LanguageContext"; // Adjust the import path
 
 function App() {
   const [showLeftNav, setLeftNav] = useState(true);
 
   return (
-    <>
+    <LanguageProvider>
       <ThemeProvider theme={theme}>
         <Grid container direction="column" justifyContent="center" alignItems="stretch" className="appHeight100 appHideScroll">
           <Grid item>
@@ -54,7 +54,7 @@ function App() {
           </Grid>
         </Grid>
       </ThemeProvider>
-    </>
+    </LanguageProvider>
   );
 }
 
