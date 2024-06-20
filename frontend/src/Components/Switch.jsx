@@ -5,6 +5,7 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import { Box } from '@mui/material';
 import Flag from 'react-world-flags';
+import {SWITCH_TEXT } from '../utilities/constants';
 
 export default function BasicButtonGroup() {
   const { language, setLanguage } = useLanguage();
@@ -12,7 +13,7 @@ export default function BasicButtonGroup() {
   return (
     <Box>
       <ButtonGroup variant="contained" aria-label="Language button group">
-        <Tooltip title="Language" arrow>
+        <Tooltip title={SWITCH_TEXT.SWITCH_TOOLTIP_ENGLISH} arrow>
           <Button
             onClick={(e) => {
               e.preventDefault();
@@ -21,10 +22,10 @@ export default function BasicButtonGroup() {
             variant={language === 'EN' ? 'contained' : 'outlined'}
           >
             <Flag code="GB" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
-            English
+            {SWITCH_TEXT.SWITCH_LANGUAGE_ENGLISH}
           </Button>
         </Tooltip>
-        <Tooltip title="Language" arrow>
+        <Tooltip title={SWITCH_TEXT.SWITCH_TOOLTIP_SPANISH} arrow>
           <Button
             onClick={(e) => {
               e.preventDefault();
@@ -33,7 +34,7 @@ export default function BasicButtonGroup() {
             variant={language === 'ES' ? 'contained' : 'outlined'}
           >
             <Flag code="ES" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
-            Español
+            {SWITCH_TEXT.SWITCH_LANGUAGE_SPANISH}
           </Button>
         </Tooltip>
       </ButtonGroup>

@@ -41,6 +41,8 @@ function ChatBody() {
     }, 1000); // Simulate processing time
   };
 
+  const getMessage = () => message;
+
   return (
     <>
       <Box display="flex" flexDirection="column" justifyContent="space-between" className="appHeight100 appWidth100">
@@ -54,10 +56,10 @@ function ChatBody() {
         </Box>
 
         <Box display="flex" justifyContent="space-between" alignItems="flex-end" sx={{ flexShrink: 0 }}>
-          <Box sx={{ display: ALLOW_VOICE_RECOGNITION === true ? "flex" : "none" }}>
-            <SpeechRecognitionComponent setMessage={setMessage} />
+          <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? "flex" : "none" }}>
+            <SpeechRecognitionComponent setMessage={setMessage} getMessage={getMessage} />
           </Box>
-          <Box sx={{ display: ALLOW_FILE_UPLOAD === true ? "flex" : "none" }}>
+          <Box sx={{ display: ALLOW_FILE_UPLOAD ? "flex" : "none" }}>
             <Attachment onFileUploadComplete={handleFileUploadComplete} />
           </Box>
           <Box sx={{ width: "100%" }} ml={2}>

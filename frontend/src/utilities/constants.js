@@ -35,6 +35,8 @@ export const TEXT = {
       CHAT_HEADER_TITLE: "Kelvyn Park AI Chat Assistant",
       CHAT_INPUT_PLACEHOLDER: "Type a Query...",
       HELPER_TEXT: "Cannot send empty message",
+      SPEECH_RECOGNITION_START: "Start Listening",
+      SPEECH_RECOGNITION_STOP: "Stop Listening",
     },
     ES: {
       APP_NAME: "Kelvyn Park",
@@ -52,8 +54,17 @@ export const TEXT = {
       CHAT_HEADER_TITLE: "Asistente de Chat AI de Kelvyn Park",
       CHAT_INPUT_PLACEHOLDER: "Escribe una consulta...",
       HELPER_TEXT: "No se puede enviar un mensaje vacío",
+      SWITCH_LANGUAGE: "Español",
+      SWITCH_TOOLKIT: "Idioma",
+      SPEECH_RECOGNITION_START: "Comenzar a escuchar",
+      SPEECH_RECOGNITION_STOP: "Dejar de escuchar",
     }
   };
+export const SWITCH_TEXT ={
+  SWITCH_LANGUAGE_ENGLISH :  "English",
+  SWITCH_TOOLTIP_ENGLISH : "Language",
+  SWITCH_LANGUAGE_SPANISH : "Español",
+  SWITCH_TOOLTIP_SPANISH : "Idioma"}
   
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
