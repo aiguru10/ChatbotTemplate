@@ -67,3 +67,4 @@ export const WEBSOCKET_API = "wss://p41tv6njhg.execute-api.us-west-2.amazonaws.c
 
 // Features
 export const ALLOW_FILE_UPLOAD = false; // Set to true to enable file upload feature
+export const ALLOW_VOICE_RECOGNITION = true;

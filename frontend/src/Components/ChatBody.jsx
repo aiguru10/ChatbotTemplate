@@ -5,12 +5,14 @@ import ChatInput from "./ChatInput";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import StreamingResponse from "./StreamingResponse"; // Import StreamingResponse component
 import createMessageBlock from "../utilities/createMessageBlock";
-import { ALLOW_FILE_UPLOAD } from "../utilities/constants";
+import { ALLOW_FILE_UPLOAD, ALLOW_VOICE_RECOGNITION } from "../utilities/constants";
 import BotFileCheckReply from "./BotFileCheckReply";
+import SpeechRecognitionComponent from "./SpeechRecognition";
 
 function ChatBody() {
   const [messageList, setMessageList] = useState([]);
   const [processing, setProcessing] = useState(false);
+  const [message, setMessage] = useState("");
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -52,11 +54,14 @@ function ChatBody() {
         </Box>
 
         <Box display="flex" justifyContent="space-between" alignItems="flex-end" sx={{ flexShrink: 0 }}>
+          <Box sx={{ display: ALLOW_VOICE_RECOGNITION === true ? "flex" : "none" }}>
+            <SpeechRecognitionComponent setMessage={setMessage} />
+          </Box>
           <Box sx={{ display: ALLOW_FILE_UPLOAD === true ? "flex" : "none" }}>
             <Attachment onFileUploadComplete={handleFileUploadComplete} />
           </Box>
           <Box sx={{ width: "100%" }} ml={2}>
-            <ChatInput onSendMessage={handleSendMessage} processing={processing} />
+            <ChatInput onSendMessage={handleSendMessage} processing={processing} message={message} setMessage={setMessage} />
           </Box>
         </Box>
       </Box>

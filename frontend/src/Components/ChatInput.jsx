@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
 import { TEXT } from "../utilities/constants"; // Adjust the import path
 
-function ChatInput({ onSendMessage, processing }) {
-  const [message, setMessage] = useState("");
+function ChatInput({ onSendMessage, processing, message, setMessage }) {
   const [helperText, setHelperText] = useState("");
   const { language } = useLanguage();
 
-  // Function to handle typing event
   const handleTyping = (event) => {
     if (helperText) {
       setHelperText("");
@@ -17,15 +15,18 @@ function ChatInput({ onSendMessage, processing }) {
     setMessage(event.target.value);
   };
 
-  // Function to handle send message
   const handleSendMessage = () => {
     if (message.trim() !== "") {
       onSendMessage(message);
       setMessage("");
     } else {
-      setHelperText(TEXT[language].HELPER_TEXT); // Add helper text in constants
+      setHelperText(TEXT[language].HELPER_TEXT);
     }
   };
+
+  useEffect(() => {
+    console.log("Updated message: ", message);
+  }, [message]);
 
   return (
     <Grid container item xs={12} alignItems="center" className="sendMessageContainer">
@@ -39,7 +40,7 @@ function ChatInput({ onSendMessage, processing }) {
           value={message}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault(); // Prevents a newline from being added
+              e.preventDefault();
               handleSendMessage();
             }
           }}
