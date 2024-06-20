@@ -3,8 +3,7 @@ import { useLanguage } from '../utilities/LanguageContext'; // Adjust the import
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
-import { Box, Typography } from '@mui/material';
-import LanguageIcon from '@mui/icons-material/Language';
+import { Box } from '@mui/material';
 import Flag from 'react-world-flags';
 
 export default function BasicButtonGroup() {
@@ -12,11 +11,8 @@ export default function BasicButtonGroup() {
 
   return (
     <Box>
-      {/* <Typography variant="caption" display="block" gutterBottom>
-        Language
-      </Typography> */}
       <ButtonGroup variant="contained" aria-label="Language button group">
-        <Tooltip title="English" arrow>
+        <Tooltip title="Language" arrow>
           <Button
             onClick={(e) => {
               e.preventDefault();
@@ -25,10 +21,10 @@ export default function BasicButtonGroup() {
             variant={language === 'EN' ? 'contained' : 'outlined'}
           >
             <Flag code="GB" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
-            En
+            English
           </Button>
         </Tooltip>
-        <Tooltip title="Español" arrow>
+        <Tooltip title="Language" arrow>
           <Button
             onClick={(e) => {
               e.preventDefault();
@@ -37,7 +33,7 @@ export default function BasicButtonGroup() {
             variant={language === 'ES' ? 'contained' : 'outlined'}
           >
             <Flag code="ES" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
-            Es
+            Español
           </Button>
         </Tooltip>
       </ButtonGroup>

@@ -31,7 +31,7 @@ function AppHeader() {
           <img src={Logo} alt={`${TEXT[language].APP_NAME} Logo`} height={48} />
         </Grid>
         <Grid item>
-          <Grid container alignItems="center" justifyContent="space-evenly" spacing={1}>
+          <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>
             <Grid item>
               <Switch />
             </Grid>
