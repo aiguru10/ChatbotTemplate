@@ -3,7 +3,7 @@
 export const PRIMARY_MAIN = "#E7B00C"; // The main primary color used for buttons, highlights, etc.
 
 // Background color constants
-export const SECONDARY_MAIN = "#FFFFF0"; // The main secondary color used for less prominent elements
+export const SECONDARY_MAIN = "#D3D3D3"; // The main secondary color used for less prominent elements
 
 // Chat component background colors
 export const CHAT_BODY_BACKGROUND = "#FFFFFF"; // Background color for the chat body area

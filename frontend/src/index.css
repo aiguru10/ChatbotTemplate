@@ -159,8 +159,7 @@ code {
   /* margin-left: 1rem; */
   border-radius: 40px;
 }
-.MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer,
-.MuiButton-root.attachmentButton {
+.MuiGrid-root.MuiGrid-container.MuiGrid-item.sendMessageContainer{
   background: #f4f4f4;
 }
 
