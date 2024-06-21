@@ -5,6 +5,7 @@ import { styled, keyframes } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 import { useLanguage } from '../utilities/LanguageContext'; // Adjust the import path as needed
 import { TEXT } from '../utilities/constants'; // Adjust the import path as needed
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const pulse = keyframes`
@@ -32,6 +33,7 @@ const MicButton = styled(IconButton)(({ theme, listening }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  color: "default",
   backgroundColor: 'transparent',
   '&:hover': {
     backgroundColor: theme.palette.grey[200],

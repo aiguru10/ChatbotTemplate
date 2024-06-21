@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Grid, Avatar, Typography, CircularProgress } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
 import PdfIcon from "../Assets/pdf_logo.svg";
-
+import {BOTMESSAGE_BACKGROUND} from "../utilities/constants";
 function BotFileCheckReply({ message, fileName, fileStatus }) {
   const messageAlignment = "flex-start";
-  const messageBgColor = "#E1EBFF";
+  
 
   const [animationState, setAnimationState] = useState("checking");
 
@@ -26,7 +26,7 @@ function BotFileCheckReply({ message, fileName, fileStatus }) {
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
-      <Grid item style={{ background: messageBgColor, borderRadius: 20, padding: 10, marginLeft: 5 }}>
+      <Grid item style={{ background: BOTMESSAGE_BACKGROUND, borderRadius: 20, padding: 10, marginLeft: 5 }}>
         {fileStatus ? (
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

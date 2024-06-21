@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import { Box } from '@mui/material';
-import Flag from 'react-world-flags';
 import {SWITCH_TEXT } from '../utilities/constants';
 
 export default function BasicButtonGroup() {
