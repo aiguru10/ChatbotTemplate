@@ -70,7 +70,7 @@ export const SWITCH_TEXT ={
 // --------------------------------------------------------------------------------------------------------//
 
 // API endpoints
-export const CHAT_API = "https://v1npsugq9g.execute-api.us-west-2.amazonaws.com/dev/upload"; // URL for the chat API endpoint
+export const CHAT_API = ""; // URL for the chat API endpoint
 export const WEBSOCKET_API = "wss://p41tv6njhg.execute-api.us-west-2.amazonaws.com/production/"; // URL for the WebSocket API endpoint
 
 // --------------------------------------------------------------------------------------------------------//

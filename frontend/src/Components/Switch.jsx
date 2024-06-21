@@ -21,7 +21,6 @@ export default function BasicButtonGroup() {
             }}
             variant={language === 'EN' ? 'contained' : 'outlined'}
           >
-            <Flag code="GB" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
             {SWITCH_TEXT.SWITCH_LANGUAGE_ENGLISH}
           </Button>
         </Tooltip>
@@ -33,7 +32,6 @@ export default function BasicButtonGroup() {
             }}
             variant={language === 'ES' ? 'contained' : 'outlined'}
           >
-            <Flag code="ES" style={{ width: '20px', height: '20px', marginRight: '8px' }} />
             {SWITCH_TEXT.SWITCH_LANGUAGE_SPANISH}
           </Button>
         </Tooltip>
