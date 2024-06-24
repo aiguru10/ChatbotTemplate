@@ -5,7 +5,7 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
   const [cookies, setCookie] = useCookies(['language']);
-  const [language, setLanguage] = useState(cookies.language || 'EN');
+  const [language, setLanguage] = useState(cookies.language || 'null');
 
   useEffect(() => {
     setCookie('language', language, { path: '/' });

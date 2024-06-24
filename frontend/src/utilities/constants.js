@@ -64,7 +64,24 @@ export const SWITCH_TEXT ={
   SWITCH_LANGUAGE_ENGLISH :  "English",
   SWITCH_TOOLTIP_ENGLISH : "Language",
   SWITCH_LANGUAGE_SPANISH : "Español",
-  SWITCH_TOOLTIP_SPANISH : "Idioma"}
+  SWITCH_TOOLTIP_SPANISH : "Idioma"};
+
+export const LANDING_PAGE_TEXT = {
+  EN: {
+    CHOOSE_LANGUAGE: "Choose language:",
+    ENGLISH: "English",
+    SPANISH: "Español",
+    SAVE_CONTINUE: "Save and Continue",
+    APP_ASSISTANT_NAME: "Kelvyn Park GenAI Bot",
+  },
+  ES: {
+    CHOOSE_LANGUAGE: "Elige el idioma:",
+    ENGLISH: "English",
+    SPANISH: "Español",
+    SAVE_CONTINUE: "Guardar y continuar",
+    APP_ASSISTANT_NAME: "Bot GenAI de Kelvyn Park",
+  }
+};
   
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
@@ -80,3 +97,4 @@ export const WEBSOCKET_API = "wss://p41tv6njhg.execute-api.us-west-2.amazonaws.c
 export const ALLOW_FILE_UPLOAD = false; // Set to true to enable file upload feature
 export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice recognition feature
 export const ALLOW_MULTLINGUAL = true; // Set to true to enable multilingual support
+export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page

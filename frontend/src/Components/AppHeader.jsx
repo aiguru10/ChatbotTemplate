@@ -1,12 +1,12 @@
 import React from "react";
 import { Grid, AppBar } from "@mui/material";
 import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
-import { TEXT } from "../utilities/constants"; // Adjust the import path
 import Logo from "../Assets/header_logo.svg";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import Switch from "./Switch.jsx";
 import { ALLOW_MULTLINGUAL } from "../utilities/constants";
-function AppHeader() {
+
+function AppHeader({ showSwitch }) {
   const { language } = useLanguage(); // Use the language context
 
   return (
@@ -28,11 +28,11 @@ function AppHeader() {
         className="appHeight100"
       >
         <Grid item>
-          <img src={Logo} alt={`${TEXT[language].APP_NAME} Logo`} height={48} />
+          <img src={Logo} alt={`App main Logo`} height={48} />
         </Grid>
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>
-            <Grid item sx={{ display: ALLOW_MULTLINGUAL ? "flex" : "none" }}>
+            <Grid item sx={{ display: ALLOW_MULTLINGUAL && showSwitch ? "flex" : "none" }}>
               <Switch />
             </Grid>
             <Grid item>
