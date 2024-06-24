@@ -5,7 +5,7 @@ import { TEXT } from "../utilities/constants"; // Adjust the import path
 import Logo from "../Assets/header_logo.svg";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import Switch from "./Switch.jsx";
-
+import { ALLOW_MULTLINGUAL } from "../utilities/constants";
 function AppHeader() {
   const { language } = useLanguage(); // Use the language context
 
@@ -32,7 +32,7 @@ function AppHeader() {
         </Grid>
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>
-            <Grid item>
+            <Grid item sx={{ display: ALLOW_MULTLINGUAL ? "flex" : "none" }}>
               <Switch />
             </Grid>
             <Grid item>

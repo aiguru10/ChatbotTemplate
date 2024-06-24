@@ -7,9 +7,20 @@ import LeftNav from "./Components/LeftNav";
 import ChatHeader from "./Components/ChatHeader";
 import ChatBody from "./Components/ChatBody";
 import { LanguageProvider } from "./utilities/LanguageContext"; // Adjust the import path
+import LandingPage from "./Components/LandingPage";
+import { useCookies } from "react-cookie";
 
 function App() {
   const [showLeftNav, setLeftNav] = useState(true);
+  const [cookies] = useCookies(['language']);
+  const [language, setLanguage] = useState(cookies.language || null);
+  const handleLanguageSelect = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
+
+  if (!language) {
+    return <LandingPage onLanguageSelect={handleLanguageSelect} />;
+  }
 
   return (
     <LanguageProvider>

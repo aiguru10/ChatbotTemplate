@@ -4,10 +4,20 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import { Box } from '@mui/material';
-import {SWITCH_TEXT } from '../utilities/constants';
+import { SWITCH_TEXT } from '../utilities/constants';
+import { useCookies } from 'react-cookie';
 
-export default function BasicButtonGroup() {
+export default function Switch() {
   const { language, setLanguage } = useLanguage();
+  const [, setCookie] = useCookies(['language']);
+
+  const handleLanguageChange = (newLanguage) => {
+    if (newLanguage !== language) {
+      setLanguage(newLanguage);
+      setCookie('language', newLanguage, { path: '/' });
+      window.location.reload(); // Refresh the page to apply the new language setting
+    }
+  };
 
   return (
     <Box>
@@ -16,7 +26,7 @@ export default function BasicButtonGroup() {
           <Button
             onClick={(e) => {
               e.preventDefault();
-              setLanguage('EN');
+              handleLanguageChange('EN');
             }}
             variant={language === 'EN' ? 'contained' : 'outlined'}
           >
@@ -27,7 +37,7 @@ export default function BasicButtonGroup() {
           <Button
             onClick={(e) => {
               e.preventDefault();
-              setLanguage('ES');
+              handleLanguageChange('ES');
             }}
             variant={language === 'ES' ? 'contained' : 'outlined'}
           >
