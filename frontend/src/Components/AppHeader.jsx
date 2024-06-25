@@ -1,7 +1,6 @@
 import React from "react";
 import { Grid, AppBar } from "@mui/material";
 import Logo from "../Assets/header_logo.svg";
-import UserAvatar from "../Assets/UserAvatar.svg";
 import Switch from "./Switch.jsx";
 import { ALLOW_MULTLINGUAL } from "../utilities/constants";
 
@@ -14,7 +13,7 @@ function AppHeader({ showSwitch }) {
         backgroundColor: (theme) => theme.palette.background.header,
         height: "5rem",
         boxShadow: "none",
-        borderBottom: (theme) => `1px solid ${theme.palette.primary[50]}`,
+        borderBottom: (theme) => `1.5px solid ${theme.palette.primary[50]}`,
       }}
     >
       <Grid
@@ -22,7 +21,7 @@ function AppHeader({ showSwitch }) {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ padding: "0 4rem" }}
+        sx={{ padding: "0 3rem" }}
         className="appHeight100"
       >
         <Grid item>
@@ -32,9 +31,6 @@ function AppHeader({ showSwitch }) {
           <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>
             <Grid item sx={{ display: ALLOW_MULTLINGUAL && showSwitch ? "flex" : "none" }}>
               <Switch />
-            </Grid>
-            <Grid item>
-              <img src={UserAvatar} alt="Profile Icon" height={36} />
             </Grid>
           </Grid>
         </Grid>

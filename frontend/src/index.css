@@ -132,7 +132,10 @@ code {
 .appTextUpperCase {
   text-transform: uppercase;
 }
-
+li {
+   color : white;
+}
+/* Text Align Classes */
 .MuiGrid-root.MuiGrid-item.userMessage {
   margin-right: 0.5rem;
   text-align: start;

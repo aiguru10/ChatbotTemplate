@@ -32,7 +32,7 @@ const LandingPage = () => {
           <ChatHeader selectedLanguage={selectedLanguage} />
         </Box>
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" p={12}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             {texts.CHOOSE_LANGUAGE}
           </Typography>
           <RadioGroup value={selectedLanguage} onChange={handleLanguageChange}>

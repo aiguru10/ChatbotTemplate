@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { PRIMARY_MAIN, SECONDARY_MAIN, CHAT_BODY_BACKGROUND, CHAT_LEFT_PANEL_BACKGROUND, HEADER_BACKGROUND, USERMESSAGE_BACKGROUND, BOTMESSAGE_BACKGROUND } from "./utilities/constants";
+import { PRIMARY_MAIN, SECONDARY_MAIN, CHAT_BODY_BACKGROUND, CHAT_LEFT_PANEL_BACKGROUND, HEADER_BACKGROUND, USERMESSAGE_BACKGROUND, BOTMESSAGE_BACKGROUND, primary_50 } from "./utilities/constants";
 
 const theme = createTheme({
   typography: {
@@ -8,6 +8,7 @@ const theme = createTheme({
   palette: {
     primary: {
       main: PRIMARY_MAIN,
+      50: primary_50,
     },
     background: {
       default: CHAT_BODY_BACKGROUND,
