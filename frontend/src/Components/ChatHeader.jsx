@@ -25,7 +25,3 @@ function ChatHeader({ selectedLanguage }) {
 }
 
 export default ChatHeader;
-
-
-
-{/* || LANDING_PAGE_TEXT[selectedLanguage]?.LANDING_PAGE_TEXT} Safe fallback || LANDING_PAGE_TEXT[selectedLanguage]?.LANDING_PAGE_TEXT */}

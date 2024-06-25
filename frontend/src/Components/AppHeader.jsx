@@ -1,13 +1,11 @@
 import React from "react";
 import { Grid, AppBar } from "@mui/material";
-import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
 import Logo from "../Assets/header_logo.svg";
 import UserAvatar from "../Assets/UserAvatar.svg";
 import Switch from "./Switch.jsx";
 import { ALLOW_MULTLINGUAL } from "../utilities/constants";
 
 function AppHeader({ showSwitch }) {
-  const { language } = useLanguage(); // Use the language context
 
   return (
     <AppBar

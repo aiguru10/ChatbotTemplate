@@ -6,7 +6,7 @@ import { CHAT_API } from "../utilities/constants";
 
 function Attachment({ onFileUploadComplete }) {
   const [uploading, setUploading] = useState(false);
-  const [uploadStatus, setUploadStatus] = useState("");
+  const [setUploadStatus] = useState("");
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
