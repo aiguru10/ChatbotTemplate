@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
@@ -24,10 +24,6 @@ function ChatInput({ onSendMessage, processing, message, setMessage }) {
     }
   };
 
-  useEffect(() => {
-    console.log("Updated message: ", message);
-  }, [message]);
-
   return (
     <Grid container item xs={12} alignItems="center" className="sendMessageContainer">
       <Grid item xs={11.5}>
@@ -39,7 +35,7 @@ function ChatInput({ onSendMessage, processing, message, setMessage }) {
           id="USERCHATINPUT"
           value={message}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
+            if (e.key === "Enter" && !e.shiftKey && !processing) {
               e.preventDefault();
               handleSendMessage();
             }

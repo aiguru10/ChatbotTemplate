@@ -3,7 +3,7 @@ import { Grid, Avatar, Typography, CircularProgress } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
 import { WEBSOCKET_API } from "../utilities/constants";
 
-const StreamingMessage = ({ initialMessage }) => {
+const StreamingMessage = ({ initialMessage, setProcessing }) => {
   const [responses, setResponses] = useState([]);
   const [completed, setCompleted] = useState(false);
   const ws = useRef(null);
@@ -23,13 +23,20 @@ const StreamingMessage = ({ initialMessage }) => {
       try {
         messageBuffer.current += event.data; // Append new data to buffer
         const parsedData = JSON.parse(messageBuffer.current); // Try to parse the full buffer
+        
+        if (parsedData.type === "end") {
+          // Implement your logic here
+          setCompleted(true);
+          setProcessing(false); // Set processing to false when parsing is complete
+          console.log("end of conversation");
+        }
+        
         if (parsedData.type === "delta") {
           setResponses((prev) => [...prev, parsedData.text]);
         }
+
+        // Update the previous data type
         messageBuffer.current = ""; // Clear buffer on successful parse
-        if (parsedData.type === "end") {
-          setCompleted(true);
-        }
       } catch (e) {
         if (e instanceof SyntaxError) {
           console.log("Received incomplete JSON, waiting for more data...");
@@ -44,15 +51,21 @@ const StreamingMessage = ({ initialMessage }) => {
       console.log("WebSocket Error: ", error);
     };
 
-    ws.current.onclose = () => {
-      console.log("WebSocket Disconnected");
+    ws.current.onclose = (event) => {
+      if (event.wasClean) {
+        console.log(`WebSocket closed cleanly, code=${event.code}, reason=${event.reason}`);
+      } else {
+        console.log("WebSocket Disconnected unexpectedly");
+      }
       setCompleted(true);
     };
 
     return () => {
-      ws.current.close();
+      if (ws.current) {
+        ws.current.close();
+      }
     };
-  }, [initialMessage]);
+  }, [initialMessage, setProcessing]); // Add setProcessing to the dependency array
 
   return (
     <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">

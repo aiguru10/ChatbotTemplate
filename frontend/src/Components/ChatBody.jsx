@@ -26,6 +26,7 @@ function ChatBody() {
   };
 
   const handleSendMessage = (message) => {
+    setProcessing(true); // Set processing to true when sending a message
     const newMessageBlock = createMessageBlock(message, "USER", "TEXT", "SENT");
     setMessageList([...messageList, newMessageBlock]);
     getBotResponse(setMessageList, setProcessing, message);
@@ -49,7 +50,7 @@ function ChatBody() {
         <Box flex={1} overflow="auto" className="chatScrollContainer">
           {messageList.map((msg, index) => (
             <Box key={index} mb={2}>
-              {msg.sentBy === "USER" ? <UserReply message={msg.message} /> : msg.sentBy === "BOT" && msg.state === "PROCESSING" ? <StreamingResponse initialMessage={msg.message} /> : <BotFileCheckReply message={msg.message} fileName={msg.fileName} fileStatus={msg.fileStatus} messageType={msg.sentBy === "USER" ? "user_doc_upload" : "bot_response"} />}
+              {msg.sentBy === "USER" ? <UserReply message={msg.message} /> : msg.sentBy === "BOT" && msg.state === "PROCESSING" ? <StreamingResponse initialMessage={msg.message} setProcessing={setProcessing} /> : <BotFileCheckReply message={msg.message} fileName={msg.fileName} fileStatus={msg.fileStatus} messageType={msg.sentBy === "USER" ? "user_doc_upload" : "bot_response"} />}
             </Box>
           ))}
           <div ref={messagesEndRef} />
@@ -87,9 +88,7 @@ function UserReply({ message }) {
 }
 
 const getBotResponse = (setMessageList, setProcessing, message) => {
-  setProcessing(true);
   const botMessageBlock = createMessageBlock(message, "BOT", "TEXT", "PROCESSING");
   setMessageList((prevList) => [...prevList, botMessageBlock]);
-  setProcessing(false);
   // WebSocket connection and handling will be done by the StreamingResponse component
 };
