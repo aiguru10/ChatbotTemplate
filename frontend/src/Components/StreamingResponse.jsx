@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Grid, Avatar, Typography, CircularProgress } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
 import { WEBSOCKET_API } from "../utilities/constants";
+import ReactMarkdown from "react-markdown";
 
 const StreamingMessage = ({ initialMessage }) => {
   const [responses, setResponses] = useState([]);
@@ -59,8 +60,12 @@ const StreamingMessage = ({ initialMessage }) => {
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
-      <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
+      {/* <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
         <Typography variant="body2">{responses.join("")}</Typography>
+        {!completed && <CircularProgress size={24} className="loading" />}
+      </Grid> */}
+      <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
+      <ReactMarkdown variant="body2">{responses.join("")}</ReactMarkdown>
         {!completed && <CircularProgress size={24} className="loading" />}
       </Grid>
     </Grid>
