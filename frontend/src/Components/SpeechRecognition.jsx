@@ -29,7 +29,7 @@ const MicButton = styled(IconButton)(({ theme, listening }) => ({
   '&:hover': { backgroundColor: theme.palette.grey[200] },
   '& .MuiSvgIcon-root': {
     animation: listening ? `${pulse} 1.5s infinite` : 'none',
-    color: listening ? theme.palette.primary.main : theme.palette.text.primary,
+    color: listening ? theme.palette.primary[50] : theme.palette.primary.main ,
   },
 }));
 

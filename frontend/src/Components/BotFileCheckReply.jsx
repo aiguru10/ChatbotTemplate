@@ -20,6 +20,7 @@ function BotFileCheckReply({ message, fileName, fileStatus }) {
     }
     return () => clearTimeout(timeout);
   }, [animationState, fileStatus]);
+  
 
   return (
     <Grid container direction="row" justifyContent={messageAlignment} alignItems="center">

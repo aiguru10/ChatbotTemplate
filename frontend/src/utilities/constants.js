@@ -100,6 +100,7 @@ export const WEBSOCKET_API = "wss://p41tv6njhg.execute-api.us-west-2.amazonaws.c
 
 // Features
 export const ALLOW_FILE_UPLOAD = false; // Set to true to enable file upload feature
-export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice recognition feature
+export const ALLOW_VOICE_RECOGNITION = true;
+export const ALLOW_FAQ = true; // Set to true to enable the FAQs to be visible in Chat body // Set to true to enable voice recognition feature
 export const ALLOW_MULTLINGUAL = true; // Set to true to enable multilingual support
 export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page
