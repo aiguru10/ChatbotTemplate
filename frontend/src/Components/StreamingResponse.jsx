@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Grid, Avatar, Typography, CircularProgress } from "@mui/material";
+import { Grid, Avatar, Typography } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
 import { WEBSOCKET_API } from "../utilities/constants";
 
 const StreamingMessage = ({ initialMessage, setProcessing }) => {
   const [responses, setResponses] = useState([]);
-  const [completed, setCompleted] = useState(false);
   const ws = useRef(null);
   const messageBuffer = useRef(""); // Buffer to hold incomplete JSON strings
 
@@ -26,7 +25,6 @@ const StreamingMessage = ({ initialMessage, setProcessing }) => {
         
         if (parsedData.type === "end") {
           // Implement your logic here
-          setCompleted(true);
           setProcessing(false); // Set processing to false when parsing is complete
           console.log("end of conversation");
         }
@@ -57,7 +55,6 @@ const StreamingMessage = ({ initialMessage, setProcessing }) => {
       } else {
         console.log("WebSocket Disconnected unexpectedly");
       }
-      setCompleted(true);
     };
 
     return () => {
@@ -65,7 +62,8 @@ const StreamingMessage = ({ initialMessage, setProcessing }) => {
         ws.current.close();
       }
     };
-  }, [initialMessage, setProcessing]); // Add setProcessing to the dependency array
+  }, [initialMessage, setProcessing]
+); // Add setProcessing to the dependency array
 
   return (
     <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">
@@ -74,7 +72,6 @@ const StreamingMessage = ({ initialMessage, setProcessing }) => {
       </Grid>
       <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
         <Typography variant="body2">{responses.join("")}</Typography>
-        {!completed && <CircularProgress size={24} className="loading" />}
       </Grid>
     </Grid>
   );
