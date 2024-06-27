@@ -13,7 +13,7 @@ export const FAQ_HEADER_BACKGROUND = "#FFFFFF"; // Background color for the FAQ 
 export const ABOUT_US_TEXT = "#FFFFFF"; // Text color for the About Us section in the left panel
 export const FAQ_TEXT = "#FFFFFF"; // Text color for the FAQ section in the left panel
 export const HEADER_BACKGROUND = "#FFFFFF"; // Background color for the header
-export const HEADER_TEXT_GRADIENT = "#444E56";
+export const HEADER_TEXT_GRADIENT = "#444E56"; // Text gradient color for the header
 
 // Message background colors
 export const BOTMESSAGE_BACKGROUND = "#F5F5F5"; // Background color for messages sent by the bot
@@ -42,6 +42,7 @@ export const TEXT = {
       HELPER_TEXT: "Cannot send empty message",
       SPEECH_RECOGNITION_START: "Start Listening",
       SPEECH_RECOGNITION_STOP: "Stop Listening",
+      SPEECH_RECOGNITION_HELPER_TEXT: "Stop speaking to send the message" // New helper text
     },
     ES: {
       APP_NAME: "Kelvyn Park",
@@ -59,12 +60,11 @@ export const TEXT = {
       CHAT_HEADER_TITLE: "Asistente de Chat AI de Kelvyn Park",
       CHAT_INPUT_PLACEHOLDER: "Escribe una consulta...",
       HELPER_TEXT: "No se puede enviar un mensaje vacío",
-      SWITCH_LANGUAGE: "Español",
-      SWITCH_TOOLKIT: "Idioma",
       SPEECH_RECOGNITION_START: "Comenzar a escuchar",
       SPEECH_RECOGNITION_STOP: "Dejar de escuchar",
+      SPEECH_RECOGNITION_HELPER_TEXT: "Deja de hablar para enviar el mensaje" // New helper text
     }
-  };
+};
 export const SWITCH_TEXT ={
   SWITCH_LANGUAGE_ENGLISH :  "English",
   SWITCH_TOOLTIP_ENGLISH : "Language",
@@ -87,7 +87,7 @@ export const LANDING_PAGE_TEXT = {
     APP_ASSISTANT_NAME: "Bot GenAI de Kelvyn Park",
   }
 };
-  
+
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
 

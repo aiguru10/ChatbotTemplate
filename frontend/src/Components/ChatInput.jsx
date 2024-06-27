@@ -50,6 +50,7 @@ function ChatInput({ onSendMessage, processing }) {
           multiline
           maxRows={4}
           fullWidth
+          disabled={isListening}
           placeholder={TEXT[language].CHAT_INPUT_PLACEHOLDER}
           id="USERCHATINPUT"
           value={getMessage(message, transcript, isListening)}
@@ -60,14 +61,14 @@ function ChatInput({ onSendMessage, processing }) {
             }
           }}
           onChange={handleTyping}
-          helperText={helperText}
+          helperText={isListening ? TEXT[language].SPEECH_RECOGNITION_HELPER_TEXT : helperText}
           sx={{ "& fieldset": { border: "none" } }}
         />
       </Grid>
       <Grid item xs={0.5}>
         <IconButton
           aria-label="send"
-          disabled={processing}
+          disabled={processing || isListening}
           onClick={handleSendMessage}
           color={message.trim() !== "" ? "primary" : "default"}
         >
