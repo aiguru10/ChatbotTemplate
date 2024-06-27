@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
-import { TEXT } from "../utilities/constants"; // Adjust the import path
+import { useLanguage } from "../utilities/LanguageContext";
+import { TEXT } from "../utilities/constants";
+import { useTranscript } from "../utilities/TranscriptContext";
 
-function ChatInput({ onSendMessage, processing, message, setMessage }) {
+function ChatInput({ onSendMessage, processing }) {
+  const [message, setMessage] = useState("");
   const [helperText, setHelperText] = useState("");
   const { language } = useLanguage();
+  const { transcript, setTranscript, isListening } = useTranscript();
+
+  useEffect(() => {
+    if (!isListening && transcript) {
+      setMessage(prevMessage => prevMessage ? `${prevMessage} ${transcript}` : transcript);
+      setTranscript(""); // Clear the transcript buffer
+    }
+  }, [isListening, transcript, setTranscript]);
 
   const handleTyping = (event) => {
     if (helperText) {
@@ -24,6 +34,15 @@ function ChatInput({ onSendMessage, processing, message, setMessage }) {
     }
   };
 
+  const getMessage = (message, transcript, isListening) => {
+    if (isListening) {
+      if (transcript.length) {
+        return message.length ? `${message} ${transcript}` : transcript;
+      }
+    }
+    return message;
+  };
+
   return (
     <Grid container item xs={12} alignItems="center" className="sendMessageContainer">
       <Grid item xs={11.5}>
@@ -33,7 +52,7 @@ function ChatInput({ onSendMessage, processing, message, setMessage }) {
           fullWidth
           placeholder={TEXT[language].CHAT_INPUT_PLACEHOLDER}
           id="USERCHATINPUT"
-          value={message}
+          value={getMessage(message, transcript, isListening)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey && !processing) {
               e.preventDefault();
@@ -42,9 +61,7 @@ function ChatInput({ onSendMessage, processing, message, setMessage }) {
           }}
           onChange={handleTyping}
           helperText={helperText}
-          sx={{
-            "& fieldset": { border: "none" },
-          }}
+          sx={{ "& fieldset": { border: "none" } }}
         />
       </Grid>
       <Grid item xs={0.5}>

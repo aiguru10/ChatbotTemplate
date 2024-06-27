@@ -10,6 +10,7 @@ import { LanguageProvider} from "./utilities/LanguageContext"; // Adjust the imp
 import LandingPage from "./Components/LandingPage";
 import { useCookies } from "react-cookie";
 import { ALLOW_LANDING_PAGE } from "./utilities/constants";
+import { TranscriptProvider } from './utilities/TranscriptContext';
 
 function MainApp() {
   const [showLeftNav, setLeftNav] = useState(true);
@@ -69,9 +70,11 @@ function App() {
 
   return (
     <LanguageProvider>
-      <ThemeProvider theme={theme}>
-        {!languageSet && ALLOW_LANDING_PAGE ? <LandingPage /> : <MainApp />}
-      </ThemeProvider>
+      <TranscriptProvider>
+        <ThemeProvider theme={theme}>
+          {!languageSet && ALLOW_LANDING_PAGE ? <LandingPage /> : <MainApp />}
+        </ThemeProvider>
+      </TranscriptProvider>
     </LanguageProvider>
   );
 }

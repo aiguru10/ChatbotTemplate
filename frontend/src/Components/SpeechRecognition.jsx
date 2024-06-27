@@ -1,26 +1,18 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import IconButton from '@mui/material/IconButton';
 import MicIcon from '@mui/icons-material/Mic';
 import { styled, keyframes } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import { useLanguage } from '../utilities/LanguageContext'; // Adjust the import path as needed
-import { TEXT } from '../utilities/constants'; // Adjust the import path as needed
+import { useLanguage } from '../utilities/LanguageContext';
+import { TEXT } from '../utilities/constants';
+import { useTranscript } from '../utilities/TranscriptContext';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 const pulse = keyframes`
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(231, 176, 12, 0.4);
-  }
-  70% {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 10px rgba(231, 176, 12, 0);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(231, 176, 12, 0);
-  }
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 176, 12, 0.4); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(231, 176, 12, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 176, 12, 0); }
 `;
 
 const MicButton = styled(IconButton)(({ theme, listening }) => ({
@@ -33,22 +25,18 @@ const MicButton = styled(IconButton)(({ theme, listening }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: "default",
   backgroundColor: 'transparent',
-  '&:hover': {
-    backgroundColor: theme.palette.grey[200],
-  },
+  '&:hover': { backgroundColor: theme.palette.grey[200] },
   '& .MuiSvgIcon-root': {
     animation: listening ? `${pulse} 1.5s infinite` : 'none',
     color: listening ? theme.palette.primary.main : theme.palette.text.primary,
   },
 }));
 
-function SpeechRecognitionComponent({ setMessage, getMessage }) {
-  const { language } = useLanguage(); // Use the language context
-  const [listening, setListening] = useState(false);
+function SpeechRecognitionComponent() {
+  const { language } = useLanguage();
+  const { setTranscript, isListening, setIsListening } = useTranscript();
   const recognitionRef = useRef(null);
-  const finalTranscriptRef = useRef(""); // To accumulate final transcripts
 
   useEffect(() => {
     if (!SpeechRecognition) {
@@ -61,39 +49,30 @@ function SpeechRecognitionComponent({ setMessage, getMessage }) {
 
     recognition.continuous = true;
     recognition.interimResults = true;
-    recognition.lang = language === 'ES' ? 'es-ES' : 'en-US'; // Set language based on context
+    recognition.lang = language === 'ES' ? 'es-ES' : 'en-US';
 
     recognition.onresult = (event) => {
-      let interimTranscript = "";
-
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const transcript = event.results[i][0].transcript;
-        if (event.results[i].isFinal) {
-          finalTranscriptRef.current += transcript + " ";
-          const currentMessage = getMessage();
-          setMessage(currentMessage + finalTranscriptRef.current.trim());
-        } else {
-          interimTranscript += transcript;
-        }
+      let text = "";
+      for (let i = 0; i < event.results.length; i++) {
+        text += event.results[i][0].transcript;
       }
-
-      console.log("Interim Transcript: ", interimTranscript);
-      console.log("Final Transcript: ", finalTranscriptRef.current);
+      setTranscript(text);
     };
 
     recognition.onerror = (event) => {
       console.error("Error occurred in recognition: " + event.error);
-      setListening(false); // Reset listening state on error
+      setIsListening(false);
     };
 
     recognition.onend = () => {
       console.log("Recognition ended");
+      setIsListening(false);
     };
 
     return () => {
       recognition.stop();
     };
-  }, [setMessage, getMessage, language]); // Reinitialize on language change
+  }, [language, setTranscript, setIsListening]);
 
   const toggleListen = () => {
     const recognition = recognitionRef.current;
@@ -102,31 +81,19 @@ function SpeechRecognitionComponent({ setMessage, getMessage }) {
       return;
     }
 
-    if (listening) {
+    if (isListening) {
       recognition.stop();
       console.log("Recognition stopped");
-      finalTranscriptRef.current = ""; // Reset final transcript on stop
     } else {
-      finalTranscriptRef.current = ""; // Reset final transcript on start
       recognition.start();
       console.log("Recognition started");
     }
-    setListening(!listening);
+    setIsListening(!isListening);
   };
 
-  useEffect(() => {
-    // Reset finalTranscriptRef when message is cleared
-    if (!getMessage()) {
-      finalTranscriptRef.current = "";
-    }
-  }, [getMessage]);
-
   return (
-    <Tooltip title={listening ? TEXT[language].SPEECH_RECOGNITION_STOP : TEXT[language].SPEECH_RECOGNITION_START}>
-      <MicButton
-        listening={listening ? 1 : 0}
-        onClick={toggleListen}
-      >
+    <Tooltip title={isListening ? TEXT[language].SPEECH_RECOGNITION_STOP : TEXT[language].SPEECH_RECOGNITION_START}>
+      <MicButton listening={isListening ? 1 : 0} onClick={toggleListen}>
         <MicIcon />
       </MicButton>
     </Tooltip>
