@@ -62,12 +62,6 @@ function App() {
   const [cookies] = useCookies(['language']);
   const languageSet = Boolean(cookies.language);
 
-  // useEffect(() => {
-  //   if (!ALLOW_LANDING_PAGE && !languageSet) {
-  //     setCookie('language', "EN", { path: '/' });
-  //   }
-  // }, [ALLOW_LANDING_PAGE, languageSet, setCookie]);
-
   return (
     <LanguageProvider>
       <TranscriptProvider>

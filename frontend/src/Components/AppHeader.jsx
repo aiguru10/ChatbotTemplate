@@ -2,7 +2,7 @@ import React from "react";
 import { Grid, AppBar } from "@mui/material";
 import Logo from "../Assets/header_logo.svg";
 import Switch from "./Switch.jsx";
-import { ALLOW_MULTLINGUAL } from "../utilities/constants";
+import { ALLOW_MULTLINGUAL_TOGGLE } from "../utilities/constants";
 
 function AppHeader({ showSwitch }) {
 
@@ -25,11 +25,11 @@ function AppHeader({ showSwitch }) {
         className="appHeight100"
       >
         <Grid item>
-          <img src={Logo} alt={`App main Logo`} height={48} />
+          <img src={Logo} alt={`App main Logo`} height={64} />
         </Grid>
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>
-            <Grid item sx={{ display: ALLOW_MULTLINGUAL && showSwitch ? "flex" : "none" }}>
+            <Grid item sx={{ display: ALLOW_MULTLINGUAL_TOGGLE && showSwitch ? "flex" : "none" }}>
               <Switch />
             </Grid>
           </Grid>
