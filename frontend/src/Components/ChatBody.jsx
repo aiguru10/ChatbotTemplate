@@ -3,18 +3,18 @@ import { Grid, Avatar, Typography, Box } from "@mui/material";
 import Attachment from "./Attachment";
 import ChatInput from "./ChatInput";
 import UserAvatar from "../Assets/UserAvatar.svg";
-import StreamingResponse from "./StreamingResponse"; // Import StreamingResponse component
+import StreamingResponse from "./StreamingResponse";
 import createMessageBlock from "../utilities/createMessageBlock";
 import { ALLOW_FILE_UPLOAD, ALLOW_VOICE_RECOGNITION, ALLOW_FAQ } from "../utilities/constants";
 import BotFileCheckReply from "./BotFileCheckReply";
 import SpeechRecognitionComponent from "./SpeechRecognition";
-import {FAQExamples} from "./index";
+import { FAQExamples } from "./index";
 
-function ChatBody() {
+function ChatBody({ onFileUpload }) {
   const [messageList, setMessageList] = useState([]);
   const [processing, setProcessing] = useState(false);
   const [message, setMessage] = useState("");
-  const [questionAsked, setQuestionAsked] = useState(false); // state to track if a question was asked to remove the FAQs once done
+  const [questionAsked, setQuestionAsked] = useState(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -28,26 +28,37 @@ function ChatBody() {
   };
 
   const handleSendMessage = (message) => {
-    setProcessing(true); // Set processing to true when sending a message
+    setProcessing(true);
     const newMessageBlock = createMessageBlock(message, "USER", "TEXT", "SENT");
     setMessageList([...messageList, newMessageBlock]);
     getBotResponse(setMessageList, setProcessing, message);
-    setQuestionAsked(true); 
+    setQuestionAsked(true);
   };
 
   const handleFileUploadComplete = (file, fileStatus) => {
+    console.log("keeping the file", file);
     const newMessageBlock = createMessageBlock(`File uploaded: ${file.name}`, "USER", "FILE", "SENT", file.name, fileStatus);
     setMessageList((prevList) => [...prevList, newMessageBlock]);
     setQuestionAsked(true);
 
     setTimeout(() => {
-      const botMessageBlock = createMessageBlock(fileStatus === "File page limit check succeeded." ? "Checking file size." : fileStatus === "File size limit exceeded." ? "File size limit exceeded. Please upload a smaller file." : "Network Error. Please try again later.", "BOT", "FILE", "RECEIVED", file.name, fileStatus);
+      const botMessageBlock = createMessageBlock(
+        fileStatus === "File page limit check succeeded." ? "Checking file size." :
+        fileStatus === "File size limit exceeded." ? "File size limit exceeded. Please upload a smaller file." :
+        "Network Error. Please try again later.",
+        "BOT", "FILE", "RECEIVED", file.name, fileStatus
+      );
       setMessageList((prevList) => [...prevList, botMessageBlock]);
-    }, 1000); // Simulate processing time
+    }, 1000);
+
+    // Call the parent's onFileUpload
+    if (onFileUpload && fileStatus === "File page limit check succeeded.") {
+      onFileUpload(file, fileStatus);
+    }
   };
 
   const handlePromptClick = (prompt) => {
-    handleSendMessage(prompt); 
+    handleSendMessage(prompt);
   };
 
   const getMessage = () => message;
@@ -56,12 +67,18 @@ function ChatBody() {
     <>
       <Box display="flex" flexDirection="column" justifyContent="space-between" className="appHeight100 appWidth100">
         <Box flex={1} overflow="auto" className="chatScrollContainer">
-        <Box sx={{ display: ALLOW_FAQ ? "flex" : "none" }}>
+          <Box sx={{ display: ALLOW_FAQ ? "flex" : "none" }}>
             {!questionAsked && <FAQExamples onPromptClick={handlePromptClick} />}
           </Box>
           {messageList.map((msg, index) => (
             <Box key={index} mb={2}>
-              {msg.sentBy === "USER" ? <UserReply message={msg.message} /> : msg.sentBy === "BOT" && msg.state === "PROCESSING" ? <StreamingResponse initialMessage={msg.message} setProcessing={setProcessing} /> : <BotFileCheckReply message={msg.message} fileName={msg.fileName} fileStatus={msg.fileStatus} messageType={msg.sentBy === "USER" ? "user_doc_upload" : "bot_response"} />}
+              {msg.sentBy === "USER" ? (
+                <UserReply message={msg.message} />
+              ) : msg.sentBy === "BOT" && msg.state === "PROCESSING" ? (
+                <StreamingResponse initialMessage={msg.message} setProcessing={setProcessing} />
+              ) : (
+                <BotFileCheckReply message={msg.message} fileName={msg.fileName} fileStatus={msg.fileStatus} messageType={msg.sentBy === "USER" ? "user_doc_upload" : "bot_response"} />
+              )}
             </Box>
           ))}
           <div ref={messagesEndRef} />
@@ -101,5 +118,5 @@ function UserReply({ message }) {
 const getBotResponse = (setMessageList, setProcessing, message) => {
   const botMessageBlock = createMessageBlock(message, "BOT", "TEXT", "PROCESSING");
   setMessageList((prevList) => [...prevList, botMessageBlock]);
-  // WebSocket connection and handling will be done by the StreamingResponse component
+  setProcessing(false);
 };

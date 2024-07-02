@@ -31,15 +31,15 @@ function BotFileCheckReply({ message, fileName, fileStatus }) {
         {fileStatus ? (
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <img src={PdfIcon} alt="PDF Icon" style={{ width: 40, height: 40, borderRadius: "50%" }} />
+              <img src={PdfIcon} alt="PDF Icon" style={{ width: 40, height: 40, borderRadius: "5px" }} />
               <Typography>{fileName}</Typography>
             </div>
             <div className={`file-status-box ${animationState}`}>
               <Typography>{animationState === "checking" ? "Checking file size..." : fileStatus}</Typography>
               {animationState === "checking" && <CircularProgress size={24} className="loading" />}
             </div>
-            {animationState === "success" && <Typography style={{ marginTop: "4px", color: "green" }}>File uploaded successfully</Typography>}
-            {animationState === "fail" && <Typography style={{ marginTop: "4px", color: "red" }}>{fileStatus}</Typography>}
+            {/* {animationState === "success" && <Typography style={{ marginTop: "4px", color: "green" }}>File uploaded successfully</Typography>}
+            {animationState === "fail" && <Typography style={{ marginTop: "4px", color: "red" }}>{fileStatus}</Typography>} */}
           </div>
         ) : (
           <Typography>{message}</Typography>

@@ -30,6 +30,7 @@ export const TEXT = {
     APP_ASSISTANT_NAME: "GenAI Bot",
     ABOUT_US_TITLE: "About us",
     ABOUT_US: "Welcome to the GenAI chat bot! We're here to assist to quickly access relevant information.",
+    FILE_PREVIEW:"Uploaded File",
     FAQ_TITLE: "Frequently Asked Questions",
     FAQS: [
       "What is React JS? and How do I get started?",
@@ -50,6 +51,7 @@ export const TEXT = {
     APP_ASSISTANT_NAME: "Bot GenAI",
     ABOUT_US_TITLE: "Acerca de nosotros",
     ABOUT_US: "¡Bienvenido al chatbot GenAI! Estamos aquí para ayudarte a acceder rápidamente a la información relevante.",
+    FILE_PREVIEW:"Vista previa del documento",
     FAQ_TITLE: "Preguntas frecuentes",
     FAQS: [
       "¿Qué es React JS? y ¿Cómo puedo empezar?",
@@ -106,7 +108,7 @@ export const WEBSOCKET_API = process.env.REACT_APP_WEBSOCKET_API; // URL for the
 // --------------------------------------------------------------------------------------------------------//
 
 // Features
-export const ALLOW_FILE_UPLOAD = false; // Set to true to enable file upload feature
+export const ALLOW_FILE_UPLOAD = true; // Set to true to enable file upload feature
 export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice recognition feature
 
 export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support

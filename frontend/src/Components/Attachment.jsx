@@ -6,7 +6,7 @@ import { CHAT_API } from "../utilities/constants";
 
 function Attachment({ onFileUploadComplete }) {
   const [uploading, setUploading] = useState(false);
-  const [setUploadStatus] = useState("");
+  const [uploadStatus, setUploadStatus] = useState("");
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -20,7 +20,7 @@ function Attachment({ onFileUploadComplete }) {
 
     try {
       const response = await axios.post(CHAT_API, formData);
-      console.log(JSON.stringify(response.data));
+      console.log("My file response:",JSON.stringify(response.data));
       setUploadStatus("File uploaded successfully!");
       onFileUploadComplete(file, "File page limit check succeeded.");
     } catch (error) {
@@ -44,7 +44,7 @@ function Attachment({ onFileUploadComplete }) {
       <Grid item xs={12}>
         <Button component="label" className="attachmentButton">
           <AttachFileIcon />
-          <input type="file" accept="application/pdf" hidden onChange={handleFileUpload} />
+          <input type="file" accept="application/pdf, video/mp4" hidden onChange={handleFileUpload} />
           {uploading && <CircularProgress size={24} />}
         </Button>
       </Grid>

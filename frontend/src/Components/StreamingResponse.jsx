@@ -73,11 +73,11 @@ return (
     </Grid>
     {ALLOW_MARKDOWN_BOT ? (
       <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
-        <ReactMarkdown>{responses.join("")}</ReactMarkdown>
+      <Typography variant="body2"><ReactMarkdown>{responses.join("")}</ReactMarkdown></Typography>  
       </Grid>
     ) : (
       <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
-        <Typography variant="body2">{responses.join("")}</Typography>  
+      <Typography variant="body2"><ReactMarkdown>{responses.join("")}</ReactMarkdown></Typography>  
       </Grid>
     )}
   </Grid>

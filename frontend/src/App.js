@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import theme from "./theme"; // Import your theme
 import { ThemeProvider } from "@mui/material/styles"; // Import ThemeProvider
 import Grid from "@mui/material/Grid";
@@ -6,7 +6,7 @@ import AppHeader from "./Components/AppHeader";
 import LeftNav from "./Components/LeftNav";
 import ChatHeader from "./Components/ChatHeader";
 import ChatBody from "./Components/ChatBody";
-import { LanguageProvider} from "./utilities/LanguageContext"; // Adjust the import path
+import { LanguageProvider } from "./utilities/LanguageContext"; // Adjust the import path
 import LandingPage from "./Components/LandingPage";
 import { useCookies } from "react-cookie";
 import { ALLOW_LANDING_PAGE } from "./utilities/constants";
@@ -14,20 +14,35 @@ import { TranscriptProvider } from './utilities/TranscriptContext';
 
 function MainApp() {
   const [showLeftNav, setLeftNav] = useState(true);
+  const [uploadedFile, setUploadedFile] = useState(null);
+  const [fileType, setFileType] = useState(null);
+
+  const handleFileUploadComplete = (file, fileStatus) => {
+    setUploadedFile(file);
+    const fileType = file.type === "application/pdf" || file.type === "video/mp4" ? file.type : null;
+    setFileType(fileType);
+    console.log("In app.js")
+    console.log(`File uploaded: ${file.name}, Status: ${fileStatus}`);
+  };
+
+  // change the file left navogation size based on if there is something that needs to be previewed
+  const leftNavSize = fileType ? 5 : 3;
+  const chatBodySize = fileType ? 7 : 9;
 
   return (
+    // 
     <Grid container direction="column" justifyContent="center" alignItems="stretch" className="appHeight100 appHideScroll">
       <Grid item>
         <AppHeader showSwitch={true} />
       </Grid>
       <Grid item container direction="row" justifyContent="flex-start" alignItems="stretch" className="appFixedHeight100">
-        <Grid item xs={showLeftNav ? 3 : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.chatLeftPanel }}>
-          <LeftNav showLeftNav={showLeftNav} setLeftNav={setLeftNav} />
+        <Grid item xs={showLeftNav ? leftNavSize : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.chatLeftPanel , height:"100%", overflowY:"auto"}}>
+          <LeftNav showLeftNav={showLeftNav} setLeftNav={setLeftNav} uploadedFile={uploadedFile} fileType={fileType}/>
         </Grid>
         <Grid
           container
           item
-          xs={showLeftNav ? 9 : 11.5}
+          xs={showLeftNav ? chatBodySize : 11.5}
           direction="column"
           justifyContent="flex-start"
           alignItems="stretch"
@@ -38,7 +53,7 @@ function MainApp() {
           }}
         >
           <Grid item>
-            <ChatHeader />
+            <ChatHeader onFileUpload={handleFileUploadComplete}/>
           </Grid>
           <Grid
             container
@@ -50,7 +65,7 @@ function MainApp() {
               height: { xs: "calc(100% - 2.625rem)", md: "calc(100% - 2.625rem)", lg: "calc(100% - 2.625rem)", xl: "calc(100% - 2.625rem)" },
             }}
           >
-            <ChatBody />
+            <ChatBody onFileUpload={handleFileUploadComplete} />
           </Grid>
         </Grid>
       </Grid>
