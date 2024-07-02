@@ -99,11 +99,9 @@ export const LANDING_PAGE_TEXT = {
 
 // API endpoints
 
-
 export const CHAT_API = process.env.REACT_APP_CHAT_API; // URL for the chat API endpoint
 export const WEBSOCKET_API = process.env.REACT_APP_WEBSOCKET_API; // URL for the WebSocket API endpoint
-
-
+export const AVATAR_BOT_WEBSITE_LINK = process.env.REACT_APP_AVATAR_BOT_WEBSITE_LINK; // URL for the avatar bot
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
 
