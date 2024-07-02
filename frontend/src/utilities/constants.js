@@ -113,6 +113,7 @@ export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice reco
 
 export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support
 export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page
+export const ALLOW_AVATAR_BOT = true; // Set to true to enable the avatar for the bot
 
 // --------------------------------------------------------------------------------------------------------//
 // Styling under work, would reccomend keeping it false for now

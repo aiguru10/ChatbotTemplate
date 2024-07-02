@@ -16,7 +16,7 @@ function PdfPreview({ uploadedFile, fileType }) {
         {uploadedFile.name}
       </Typography>
       {fileType === "application/pdf" && (
-        <embed src={URL.createObjectURL(uploadedFile)} width="100%" height="450px" type="application/pdf" />
+        <embed src={URL.createObjectURL(uploadedFile)} width="100%" height="520px" type="application/pdf" />
       )}
       {fileType === "video/mp4" && (
         <video width="100%" controls>
