@@ -118,5 +118,4 @@ function UserReply({ message }) {
 const getBotResponse = (setMessageList, setProcessing, message) => {
   const botMessageBlock = createMessageBlock(message, "BOT", "TEXT", "PROCESSING");
   setMessageList((prevList) => [...prevList, botMessageBlock]);
-  setProcessing(false);
 };

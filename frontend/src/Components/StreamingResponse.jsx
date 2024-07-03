@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Grid, Avatar, Typography } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
-import { WEBSOCKET_API, ALLOW_MARKDOWN_BOT } from "../utilities/constants";
-import ReactMarkdown from "react-markdown";
+import { WEBSOCKET_API } from "../utilities/constants";
 
 const StreamingMessage = ({ initialMessage, setProcessing }) => {
   const [responses, setResponses] = useState([]);
@@ -66,21 +65,15 @@ const StreamingMessage = ({ initialMessage, setProcessing }) => {
   }, [initialMessage, setProcessing]
 ); // Add setProcessing to the dependency array
 
-return (
-  <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">
-    <Grid item>
-      <Avatar alt="Bot Avatar" src={BotAvatar} />
+  return (
+    <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">
+      <Grid item>
+        <Avatar alt="Bot Avatar" src={BotAvatar} />
+      </Grid>
+      <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
+        <Typography variant="body2">{responses.join("")}</Typography>
+      </Grid>
     </Grid>
-    {ALLOW_MARKDOWN_BOT ? (
-      <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
-      <Typography variant="body2"><ReactMarkdown>{responses.join("")}</ReactMarkdown></Typography>  
-      </Grid>
-    ) : (
-      <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
-      <Typography variant="body2"><ReactMarkdown>{responses.join("")}</ReactMarkdown></Typography>  
-      </Grid>
-    )}
-  </Grid>
   );
 };
 

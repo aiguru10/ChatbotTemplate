@@ -11,6 +11,7 @@ import LandingPage from "./Components/LandingPage";
 import { useCookies } from "react-cookie";
 import { ALLOW_LANDING_PAGE } from "./utilities/constants";
 import { TranscriptProvider } from './utilities/TranscriptContext';
+import { ALLOW_PDF_PREVIEW, ALLOW_VIDEO_PREVIEW } from "./utilities/constants";
 
 function MainApp() {
   const [showLeftNav, setLeftNav] = useState(true);
@@ -26,9 +27,11 @@ function MainApp() {
   };
 
   // change the file left navogation size based on if there is something that needs to be previewed
-  const leftNavSize = fileType ? 5 : 3;
-  const chatBodySize = fileType ? 7 : 9;
-
+  const isFilePreviewAllowed = (fileType === "application/pdf" && ALLOW_PDF_PREVIEW) ||
+                               (fileType === "video/mp4" && ALLOW_VIDEO_PREVIEW);
+  const leftNavSize = isFilePreviewAllowed ? 5 : 3;
+  const chatBodySize = isFilePreviewAllowed ? 7 : 9;
+  
   return (
     // 
     <Grid container direction="column" justifyContent="center" alignItems="stretch" className="appHeight100 appHideScroll">

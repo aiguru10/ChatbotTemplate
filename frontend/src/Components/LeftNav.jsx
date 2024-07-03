@@ -6,8 +6,8 @@ import arrowRightIcon from "../Assets/arrow_right.svg"; // Assuming arrow_right.
 import PdfPreview from "./PdfPreview"; // Import the PdfPreview component
 import InfoSections from "./InfoSections"; // Import the InfoSections component
 import Avatar from "./Avatar"; // Import the Avatar component
-
-const ALLOW_AVATAR_BOT = true; // Set this to false to disable the avatar bot
+import VideoPreview from "./VideoPreview"; // Import the VideoPreview component
+import { ALLOW_AVATAR_BOT,ALLOW_PDF_PREVIEW,ALLOW_VIDEO_PREVIEW } from "../utilities/constants";
 
 function LeftNav({ showLeftNav = true, setLeftNav, uploadedFile, fileType }) {
   return (
@@ -23,8 +23,10 @@ function LeftNav({ showLeftNav = true, setLeftNav, uploadedFile, fileType }) {
                   onClick={() => setLeftNav(false)}
                 />
               </Grid>
-              {uploadedFile && (fileType === "application/pdf" || fileType === "video/mp4") ? (
-                <PdfPreview uploadedFile={uploadedFile} fileType={fileType} />
+              {uploadedFile && fileType === "application/pdf" && ALLOW_PDF_PREVIEW ? (
+                <PdfPreview uploadedFile={uploadedFile} />
+              ) : uploadedFile && fileType === "video/mp4" && ALLOW_VIDEO_PREVIEW ? (
+                <VideoPreview uploadedFile={uploadedFile} startTime={0} />
               ) : (
                 <>
                   {ALLOW_AVATAR_BOT ? (
