@@ -28,7 +28,7 @@ export const TEXT = {
   EN: {
     APP_NAME: "Chatbot Template App",
     APP_ASSISTANT_NAME: "GenAI Bot",
-    ABOUT_US_TITLE: "About us",
+    ABOUT_US_TITLE: "About Us",
     ABOUT_US: "Welcome to the GenAI chat bot! We're here to assist to quickly access relevant information.",
     FILE_PREVIEW:"Uploaded File",
     FAQ_TITLE: "Frequently Asked Questions",
@@ -83,6 +83,7 @@ export const LANDING_PAGE_TEXT = {
     SPANISH: "Español",
     SAVE_CONTINUE: "Save and Continue",
     APP_ASSISTANT_NAME: "Sample GenAI Bot Landing Page",
+    WELCOME_MESSAGE : "This chat is designed to help you access information about XYZ. You can ask questions about some FAQ and more!",
   },
   ES: {
     CHOOSE_LANGUAGE: "Elige el idioma:",
@@ -90,6 +91,7 @@ export const LANDING_PAGE_TEXT = {
     SPANISH: "Español",
     SAVE_CONTINUE: "Guardar y continuar",
     APP_ASSISTANT_NAME: "Bot GenAI de Ejemplo Página de Inicio",
+    WELCOME_MESSAGE : "Este chat está diseñado para ayudarte a acceder a información sobre XYZ. ¡Puedes hacer preguntas sobre algunas FAQ y más!",
   }
 };
 
@@ -119,3 +121,8 @@ export const ALLOW_VIDEO_PREVIEW = true; // Set to true to enable video preview
 // --------------------------------------------------------------------------------------------------------//
 // Styling under work, would reccomend keeping it false for now
 export const ALLOW_FAQ = true; // Set to true to enable the FAQs to be visible in Chat body 
+
+// VERY IMPORTANT
+// (If there is any)REMOVE THE POST PROCESSING IN SPEECH RECOGNITION TO DETECT CALVIN AS KELYVIN IN SPEECH RECOGNITION COMPONENT
+// ALSO update the title in the index.html file in the public folder
+// Change the public favicon.ico to the new favicon.ico that you would like to use

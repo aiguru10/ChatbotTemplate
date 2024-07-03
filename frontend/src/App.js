@@ -39,7 +39,7 @@ function MainApp() {
         <AppHeader showSwitch={true} />
       </Grid>
       <Grid item container direction="row" justifyContent="flex-start" alignItems="stretch" className="appFixedHeight100">
-        <Grid item xs={showLeftNav ? leftNavSize : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.chatLeftPanel , height:"100%", overflowY:"auto"}}>
+        <Grid item xs={showLeftNav ? leftNavSize : 0.5} sx={{ backgroundColor: (theme) => theme.palette.background.chatLeftPanel , height:"100%",}}>
           <LeftNav showLeftNav={showLeftNav} setLeftNav={setLeftNav} uploadedFile={uploadedFile} fileType={fileType}/>
         </Grid>
         <Grid
