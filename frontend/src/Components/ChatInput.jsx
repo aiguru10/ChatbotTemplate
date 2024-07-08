@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { useLanguage } from "../utilities/LanguageContext";
+import { useLanguage } from "../contexts/LanguageContext";
 import { TEXT } from "../utilities/constants";
-import { useTranscript } from "../utilities/TranscriptContext";
+import { useTranscript } from "../contexts/TranscriptContext";
 
 function ChatInput({ onSendMessage, processing }) {
   const [message, setMessage] = useState("");

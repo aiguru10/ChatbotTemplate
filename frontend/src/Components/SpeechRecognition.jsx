@@ -3,9 +3,9 @@ import IconButton from '@mui/material/IconButton';
 import MicIcon from '@mui/icons-material/Mic';
 import { styled, keyframes } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
-import { useLanguage } from '../utilities/LanguageContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { TEXT } from '../utilities/constants';
-import { useTranscript } from '../utilities/TranscriptContext';
+import { useTranscript } from '../contexts/TranscriptContext';
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 

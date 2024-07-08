@@ -1,7 +1,7 @@
 // src/components/PdfPreview.js
 import React from "react";
 import { Typography, Grid } from "@mui/material";
-import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
+import { useLanguage } from "../contexts/LanguageContext"; // Adjust the import path
 import { ABOUT_US_TEXT, TEXT } from "../utilities/constants"; // Adjust the import path
 
 function PdfPreview({ uploadedFile }) {

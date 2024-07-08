@@ -114,8 +114,9 @@ export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice reco
 export const ALLOW_MARKDOWN_BOT = true; // Set to true to enable markdown support for bot messages
 
 export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support
+
 export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page
-export const ALLOW_AVATAR_BOT = true; // Set to true to enable the avatar for the bot
+export const ALLOW_AVATAR_BOT = false; // Set to true to enable the avatar for the bot
 export const ALLOW_PDF_PREVIEW = false; // Set to true to enable PDF preview
 export const ALLOW_VIDEO_PREVIEW = true; // Set to true to enable video preview
 // --------------------------------------------------------------------------------------------------------//

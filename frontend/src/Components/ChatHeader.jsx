@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
+import { useLanguage } from "../contexts/LanguageContext"; // Adjust the import path
 import { TEXT, HEADER_TEXT_GRADIENT } from "../utilities/constants"; // Adjust the import path
 import { Container } from "@mui/material";
 

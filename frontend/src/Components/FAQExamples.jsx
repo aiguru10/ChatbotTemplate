@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TEXT } from "../utilities/constants";
-import { useLanguage } from "../utilities/LanguageContext"; // Adjust the import path
+import { useLanguage } from "../contexts/LanguageContext"; // Adjust the import path
 import { Box, Button, Grid } from "@mui/material";
 
 const shuffleArray = (array) => {

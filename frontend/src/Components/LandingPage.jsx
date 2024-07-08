@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Typography, Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import AppHeader from './AppHeader';
 import ChatHeader from './ChatHeader';
-import { useLanguage } from '../utilities/LanguageContext';
+import { useLanguage } from '../contexts/LanguageContext';
 import { useCookies } from 'react-cookie';
 import Grid from "@mui/material/Grid";
 import { LANDING_PAGE_TEXT } from '../utilities/constants';

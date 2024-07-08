@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
-import { ALLOW_LANDING_PAGE } from './constants';
+import { ALLOW_LANDING_PAGE } from '../utilities/constants';
 
 const LanguageContext = createContext();
 

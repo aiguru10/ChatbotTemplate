@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLanguage } from '../utilities/LanguageContext'; // Adjust the import path
+import { useLanguage } from '../contexts/LanguageContext'; // Adjust the import path
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
