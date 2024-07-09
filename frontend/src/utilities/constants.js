@@ -106,19 +106,20 @@ export const WEBSOCKET_API = process.env.REACT_APP_WEBSOCKET_API; // URL for the
 export const AVATAR_BOT_WEBSITE_LINK = process.env.REACT_APP_AVATAR_BOT_WEBSITE_LINK; // URL for the avatar bot
 // --------------------------------------------------------------------------------------------------------//
 // --------------------------------------------------------------------------------------------------------//
+export const MAX_TEXT_LENGTH_PDF = 150000; // Number of words to check for PDF size (150000 - 200000 is good enough for 200k token limit of claude)
 
 // Features
 export const ALLOW_FILE_UPLOAD = true; // Set to true to enable file upload feature
 export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice recognition feature
+export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support
 
 export const ALLOW_MARKDOWN_BOT = true; // Set to true to enable markdown support for bot messages
-
-export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support
 
 export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page
 export const ALLOW_AVATAR_BOT = false; // Set to true to enable the avatar for the bot
 export const ALLOW_PDF_PREVIEW = false; // Set to true to enable PDF preview
 export const ALLOW_VIDEO_PREVIEW = true; // Set to true to enable video preview
+export const ALLOW_CHAT_HISTORY = true; // Set to true to enable chat history
 // --------------------------------------------------------------------------------------------------------//
 // Styling under work, would reccomend keeping it false for now
 export const ALLOW_FAQ = true; // Set to true to enable the FAQs to be visible in Chat body 

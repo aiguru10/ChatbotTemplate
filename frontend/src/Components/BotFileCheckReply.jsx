@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Grid, Avatar, Typography, CircularProgress } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
 import PdfIcon from "../Assets/pdf_logo.svg";
-import {BOTMESSAGE_BACKGROUND} from "../utilities/constants";
-function BotFileCheckReply({ message, fileName, fileStatus }) {
-  const messageAlignment = "flex-start";
-  
+import { BOTMESSAGE_BACKGROUND } from "../utilities/constants";
+import { useMessage } from "../contexts/MessageContext";
+
+function BotFileCheckReply({ messageId }) {
+  const { messageList } = useMessage();
+  const messageData = messageList[messageId];
+  const { fileName, fileStatus, error } = messageData;
 
   const [animationState, setAnimationState] = useState("checking");
 
@@ -14,35 +17,34 @@ function BotFileCheckReply({ message, fileName, fileStatus }) {
     if (animationState === "checking") {
       if (fileStatus === "File page limit check succeeded.") {
         timeout = setTimeout(() => setAnimationState("success"), 1000);
-      } else if (fileStatus === "File size limit exceeded." || fileStatus === "Network Error. Please try again later.") {
+      } else if (fileStatus === "File size limit exceeded." || fileStatus === "Network Error. Please try again later." || error) {
         timeout = setTimeout(() => setAnimationState("fail"), 1000);
       }
     }
     return () => clearTimeout(timeout);
-  }, [animationState, fileStatus]);
-  
+  }, [animationState, fileStatus, error]);
 
   return (
-    <Grid container direction="row" justifyContent={messageAlignment} alignItems="center">
+    <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={2}>
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
-      <Grid item style={{ background: BOTMESSAGE_BACKGROUND, borderRadius: 20, padding: 10, marginLeft: 5 }}>
+      <Grid item style={{ background: BOTMESSAGE_BACKGROUND, borderRadius: 20, padding: 10 }}>
         {fileStatus ? (
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <img src={PdfIcon} alt="PDF Icon" style={{ width: 40, height: 40, borderRadius: "5px" }} />
-              <Typography>{fileName}</Typography>
+              <Typography variant="body2">{fileName}</Typography>
             </div>
-            <div className={`file-status-box ${animationState}`}>
-              <Typography>{animationState === "checking" ? "Checking file size..." : fileStatus}</Typography>
+            <div className={`file-status-box ${animationState}`} style={{ marginTop: 8 }}>
+              <Typography variant="body2" color={error ? "error" : "textPrimary"}>
+                {animationState === "checking" ? "Checking file size..." : fileStatus}
+              </Typography>
               {animationState === "checking" && <CircularProgress size={24} className="loading" />}
             </div>
-            {/* {animationState === "success" && <Typography style={{ marginTop: "4px", color: "green" }}>File uploaded successfully</Typography>}
-            {animationState === "fail" && <Typography style={{ marginTop: "4px", color: "red" }}>{fileStatus}</Typography>} */}
           </div>
         ) : (
-          <Typography>{message}</Typography>
+          <Typography variant="body2">{messageData.message}</Typography>
         )}
       </Grid>
     </Grid>

@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Grid, Avatar, Typography } from "@mui/material";
 import BotAvatar from "../Assets/BotAvatar.svg";
-import { WEBSOCKET_API } from "../utilities/constants";
+import { ALLOW_CHAT_HISTORY, WEBSOCKET_API, ALLOW_MARKDOWN_BOT } from "../utilities/constants";
 import { useMessage } from "../contexts/MessageContext";
 import createMessageBlock from "../utilities/createMessageBlock";
+import ReactMarkdown from "react-markdown";
 
 const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
   const [responses, setResponses] = useState([]);
@@ -20,7 +21,7 @@ const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
         JSON.stringify({
           action: "sendMessage",
           prompt: initialMessage,
-          history: messageList,
+          history: ALLOW_CHAT_HISTORY ? messageList : [],
         })
       );
       console.log("Initial message sent to bot");
@@ -89,22 +90,21 @@ const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
   }, [processing]);
 
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="flex-start"
-      alignItems="flex-end"
-    >
+    <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
-      <Grid
-        item
-        className="botMessage"
-        sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}
-      >
-        <Typography variant="body2">{responses.join("")}</Typography>
-      </Grid>
+      {ALLOW_MARKDOWN_BOT ? (
+        <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
+          <Typography variant="body2" component="div">
+            <ReactMarkdown>{responses.join("")}</ReactMarkdown>
+          </Typography>
+        </Grid>
+      ) : (
+        <Grid item className="botMessage" sx={{ backgroundColor: (theme) => theme.palette.background.botMessage }}>
+          <Typography variant="body2" component="div">{responses.join("")}</Typography>  
+        </Grid>
+      )}
     </Grid>
   );
 };

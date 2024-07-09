@@ -1,4 +1,3 @@
-// ChatBody.js
 import React, { useRef, useEffect, useState } from 'react';
 import { Box, Grid, Avatar, Typography } from '@mui/material';
 import Attachment from './Attachment';
@@ -33,7 +32,6 @@ function ChatBody({ onFileUpload }) {
     setProcessing(true);
     const newMessageBlock = createMessageBlock(message, 'USER', 'TEXT', 'SENT');
     addMessage(newMessageBlock);
-    console.log('User message sent: ', messageList);
     setQuestionAsked(true);
   };
 
@@ -47,23 +45,22 @@ function ChatBody({ onFileUpload }) {
       fileStatus
     );
     addMessage(newMessageBlock);
-    setQuestionAsked(true);
 
-    setTimeout(() => {
-      const botMessageBlock = createMessageBlock(
-        fileStatus === 'File page limit check succeeded.'
-          ? 'Checking file size.'
-          : fileStatus === 'File size limit exceeded.'
-          ? 'File size limit exceeded. Please upload a smaller file.'
-          : 'Network Error. Please try again later.',
-        'BOT',
-        'FILE',
-        'RECEIVED',
-        file.name,
-        fileStatus
-      );
-      addMessage(botMessageBlock);
-    }, 1000);
+    const botMessageBlock = createMessageBlock(
+      fileStatus === 'File page limit check succeeded.'
+        ? 'Checking file size.'
+        : fileStatus === 'File size limit exceeded.'
+        ? 'File size limit exceeded. Please upload a smaller file.'
+        : 'Network Error. Please try again later.',
+      'BOT',
+      'FILE',
+      'RECEIVED',
+      file.name,
+      fileStatus
+    );
+    addMessage(botMessageBlock);
+
+    setQuestionAsked(true);
 
     if (onFileUpload && fileStatus === 'File page limit check succeeded.') {
       onFileUpload(file, fileStatus);
@@ -75,45 +72,38 @@ function ChatBody({ onFileUpload }) {
   };
 
   return (
-    <>
-      <Box display='flex' flexDirection='column' justifyContent='space-between' className='appHeight100 appWidth100'>
-        <Box flex={1} overflow='auto' className='chatScrollContainer'>
-          <Box sx={{ display: ALLOW_FAQ ? 'flex' : 'none' }}>
-            {!questionAsked && <FAQExamples onPromptClick={handlePromptClick} />}
-          </Box>
-          {messageList.map((msg, index) => (
-            <Box key={index} mb={2}>
-              {msg.sentBy === 'USER' ? (
-                <>
-                  <UserReply message={msg.message} />
-                  <StreamingMessage initialMessage={msg.message} setProcessing={setProcessing} processing = {processing} />
-                </>
-              ) : msg.sentBy === 'BOT' && msg.state === 'PROCESSING' ? (
-                <BotFileCheckReply
-                  message={msg.message}
-                  fileName={msg.fileName}
-                  fileStatus={msg.fileStatus}
-                  messageType={msg.sentBy === 'USER' ? 'user_doc_upload' : 'bot_response'}
-                />
-              ) : null}
-            </Box>
-          ))}
-          <div ref={messagesEndRef} />
+    <Box display='flex' flexDirection='column' justifyContent='space-between' className='appHeight100 appWidth100'>
+      <Box flex={1} overflow='auto' className='chatScrollContainer'>
+        <Box sx={{ display: ALLOW_FAQ ? 'flex' : 'none' }}>
+          {!questionAsked && <FAQExamples onPromptClick={handlePromptClick} />}
         </Box>
+        {messageList.map((msg, index) => (
+          <Box key={index} mb={2}>
+            {msg.sentBy === 'USER' && msg.type === 'TEXT' ? (
+              <>
+                <UserReply message={msg.message} />
+                <StreamingMessage initialMessage={msg.message} setProcessing={setProcessing} processing={processing} />
+              </>
+            ) : msg.type === 'FILE' && msg.state === 'RECEIVED' ? (
+              <BotFileCheckReply messageId={index} />
+            ) : null}
+          </Box>
+        ))}
+        <div ref={messagesEndRef} />
+      </Box>
 
-        <Box display='flex' justifyContent='space-between' alignItems='flex-end' sx={{ flexShrink: 0 }}>
-          <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? 'flex' : 'none' }}>
-            <SpeechRecognitionComponent setMessage={setMessage} getMessage={() => message} />
-          </Box>
-          <Box sx={{ display: ALLOW_FILE_UPLOAD ? 'flex' : 'none' }}>
-            <Attachment onFileUploadComplete={handleFileUploadComplete} />
-          </Box>
-          <Box sx={{ width: '100%' }} ml={2}>
-            <ChatInput onSendMessage={handleSendMessage} processing={processing} message={message} setMessage={setMessage} />
-          </Box>
+      <Box display='flex' justifyContent='space-between' alignItems='flex-end' sx={{ flexShrink: 0 }}>
+        <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? 'flex' : 'none' }}>
+          <SpeechRecognitionComponent setMessage={setMessage} getMessage={() => message} />
+        </Box>
+        <Box sx={{ display: ALLOW_FILE_UPLOAD ? 'flex' : 'none' }}>
+          <Attachment onFileUploadComplete={handleFileUploadComplete} />
+        </Box>
+        <Box sx={{ width: '100%' }} ml={2}>
+          <ChatInput onSendMessage={handleSendMessage} processing={processing} message={message} setMessage={setMessage} />
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }
 
