@@ -11,7 +11,7 @@ function AppHeader({ showSwitch }) {
       position="static"
       sx={{
         backgroundColor: (theme) => theme.palette.background.header,
-        height: "5rem",
+        height:{ xs: "4rem", sm: "5rem" },
         boxShadow: "none",
         borderBottom: (theme) => `1.5px solid ${theme.palette.primary[50]}`,
       }}
@@ -21,11 +21,11 @@ function AppHeader({ showSwitch }) {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
-        sx={{ padding: "0 3rem" }}
+        sx={{ padding: { xs: "0 1rem", sm: "0 3rem"}}}
         className="appHeight100"
       >
-        <Grid item>
-          <img src={Logo} alt={`App main Logo`} height={64} />
+        <Grid item sx={{ width: { xs: "30%"}}}>
+          <img src={Logo} alt={`App main Logo`} height={64}/>
         </Grid>
         <Grid item>
           <Grid container alignItems="center" justifyContent="space-evenly" spacing={2}>

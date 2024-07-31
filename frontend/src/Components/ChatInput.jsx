@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TextField, Grid, IconButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -11,12 +11,34 @@ function ChatInput({ onSendMessage, processing }) {
   const { language } = useLanguage();
   const { transcript, setTranscript, isListening } = useTranscript();
 
+  const [finalTranscript, setFinalTranscript] = useState("");
+
+  const isAppendingRef = useRef(false);
+
   useEffect(() => {
-    if (!isListening && transcript) {
-      setMessage(prevMessage => prevMessage ? `${prevMessage} ${transcript}` : transcript);
-      setTranscript(""); // Clear the transcript buffer
+    if (isListening && transcript) {
+      setFinalTranscript(transcript);
     }
-  }, [isListening, transcript, setTranscript]);
+
+    if (!isListening && transcript) {
+      if (!isAppendingRef.current) {
+        isAppendingRef.current = true;
+        setMessage(prevMessage => prevMessage ? `${prevMessage} ${finalTranscript}` : finalTranscript);
+        setTranscript(""); // Clear the transcript buffer
+        setFinalTranscript(""); // Clear the final transcript
+        isAppendingRef.current = false;
+      }
+    }
+  }, [isListening, transcript, finalTranscript, setTranscript]);
+
+  // useEffect(() => {
+  //   if (!isListening && transcript) {
+  //     console.log("Use Effect", `${message} ${transcript}`)
+  //     console.log("Use Effect - transcript:",isListening, transcript);
+  //     setMessage(prevMessage => prevMessage ? `${prevMessage} ${transcript}` : transcript);
+  //     setTranscript(""); // Clear the transcript buffer
+  //   }
+  // }, [isListening, transcript, setTranscript]);
 
   const handleTyping = (event) => {
     if (helperText) {
@@ -37,6 +59,7 @@ function ChatInput({ onSendMessage, processing }) {
   const getMessage = (message, transcript, isListening) => {
     if (isListening) {
       if (transcript.length) {
+        // console.log("Get message", message.length ? `${message} ${transcript}` : transcript)
         return message.length ? `${message} ${transcript}` : transcript;
       }
     }

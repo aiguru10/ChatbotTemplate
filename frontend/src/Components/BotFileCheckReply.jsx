@@ -5,7 +5,7 @@ import PdfIcon from "../Assets/pdf_logo.svg";
 import { BOTMESSAGE_BACKGROUND } from "../utilities/constants";
 import { useMessage } from "../contexts/MessageContext";
 
-function BotFileCheckReply({ messageId }) {
+function BotFileCheckReply({ messageId , setProcessing, processing }) {
   const { messageList } = useMessage();
   const messageData = messageList[messageId];
   const { fileName, fileStatus, error } = messageData;
@@ -13,23 +13,64 @@ function BotFileCheckReply({ messageId }) {
   const [animationState, setAnimationState] = useState("checking");
 
   useEffect(() => {
+    // Starting processing when checking begins
+    setProcessing(true);
+    console.log("Started processing");
+
+    return () => {
+      // Stop processing on cleanup or when unmounted
+      setProcessing(false);
+      console.log("Stopped processing"); 
+    };
+  }, []);
+
+  useEffect(() => {
     let timeout;
-    if (animationState === "checking") {
-      if (fileStatus === "File page limit check succeeded.") {
-        timeout = setTimeout(() => setAnimationState("success"), 1000);
-      } else if (fileStatus === "File size limit exceeded." || fileStatus === "Network Error. Please try again later." || error) {
-        timeout = setTimeout(() => setAnimationState("fail"), 1000);
-      }
+    if (fileStatus === "File page limit check succeeded.") {
+      timeout = setTimeout(() => {
+        setAnimationState("success");
+        setProcessing(false); 
+        console.log("Stopped processing after success");
+      }, 1000);
+    } else if (fileStatus === "File size limit exceeded." || fileStatus === "Network Error. Please try again later." || error) {
+      timeout = setTimeout(() => {
+        setAnimationState("fail");
+        setProcessing(false); 
+        console.log("Stopped processing after failure");
+      }, 1000);
     }
+
     return () => clearTimeout(timeout);
-  }, [animationState, fileStatus, error]);
+  }, [fileStatus, error, setProcessing]);
+
+
+  // useEffect(() => {
+  //   let timeout;
+  //   if (animationState === "checking") {
+  //     console.log("My processing state", processing)
+  //     setProcessing(true); // Start processing when checking begins
+  //     if (fileStatus === "File page limit check succeeded.") {
+  //       timeout = setTimeout(() => setAnimationState("success"), 5000);
+  //       console.log("My processing state in if condition", processing)
+  //       setProcessing(false);
+  //     } else if (fileStatus === "File size limit exceeded." || fileStatus === "Network Error. Please try again later." || error) {
+  //       timeout = setTimeout(() => setAnimationState("fail"), 5000);
+  //       console.log("My processing state in if condition", processing)
+  //       setProcessing(false);
+  //     }
+  //   }
+  //   return () => {
+  //     clearTimeout(timeout);
+  //     setProcessing(false); // Ensuring to stop processing on cleanup
+  //   };
+  // }, [animationState, fileStatus, error]);
 
   return (
     <Grid container direction="row" justifyContent="flex-start" alignItems="center" spacing={2}>
       <Grid item>
         <Avatar alt="Bot Avatar" src={BotAvatar} />
       </Grid>
-      <Grid item style={{ background: BOTMESSAGE_BACKGROUND, borderRadius: 20, padding: 10 }}>
+      <Grid item style={{ background: BOTMESSAGE_BACKGROUND, borderRadius: 10, padding: 10 , margin:"1rem 0 0 0.5rem"}}>
         {fileStatus ? (
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>

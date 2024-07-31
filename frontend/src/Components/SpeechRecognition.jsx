@@ -1,3 +1,79 @@
+// import React, { useEffect, useRef, } from "react";
+// import IconButton from '@mui/material/IconButton';
+// import MicIcon from '@mui/icons-material/Mic';
+// import { styled, keyframes } from '@mui/material/styles';
+// import Tooltip from '@mui/material/Tooltip';
+// import { useLanguage } from '../contexts/LanguageContext';
+// import { TEXT } from '../utilities/constants';
+// import { useTranscript } from '../contexts/TranscriptContext';
+// import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+
+
+// const pulse = keyframes`
+//   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 176, 12, 0.4); }
+//   70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(231, 176, 12, 0); }
+//   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 176, 12, 0); }
+// `;
+
+// const MicButton = styled(IconButton)(({ theme, listening }) => ({
+//   borderRadius: '50%',
+//   marginLeft: '8px',
+//   padding: '0.5rem',
+//   height: '3.5rem',
+//   width: '3.5rem',
+//   minWidth: '0',
+//   display: 'flex',
+//   justifyContent: 'center',
+//   alignItems: 'center',
+//   backgroundColor: 'transparent',
+//   '&:hover': { backgroundColor: theme.palette.grey[200] },
+//   '& .MuiSvgIcon-root': {
+//     animation: listening ? `${pulse} 1.5s infinite` : 'none',
+//     color: listening ? theme.palette.primary[50] : theme.palette.primary.main ,
+//   },
+// }));
+
+// function SpeechRecognitionComponent() {
+//   const { language } = useLanguage();
+//   const { setTranscript, isListening, setIsListening } = useTranscript();
+//   const {
+//     transcript,
+//     listening,
+//     resetTranscript,
+//     browserSupportsSpeechRecognition
+//   } = useSpeechRecognition();
+
+//   useEffect(() => {
+//     setTranscript(transcript);
+//   }, [transcript]);
+
+//   if (!browserSupportsSpeechRecognition) {
+//     return <span>Browser doesn't support speech recognition.</span>;
+//   }
+
+//   const toggleListen = () => {
+//     if (isListening) {
+//       SpeechRecognition.stopListening()
+//       console.log("Recognition stopped");
+//       resetTranscript();
+//     } else {
+//       SpeechRecognition.startListening({ continuous: true })
+//       console.log("Recognition started");
+//     }
+//     setIsListening(!isListening);
+//      };
+//   return (
+//     <div>
+//       <Tooltip title={listening ? TEXT[language].SPEECH_RECOGNITION_STOP : TEXT[language].SPEECH_RECOGNITION_START}>
+//        <MicButton listening={isListening ? 1 : 0} onClick={toggleListen}>
+//          <MicIcon />
+//        </MicButton>
+//      </Tooltip>
+//     </div>
+//   );
+// };
+// export default SpeechRecognitionComponent;
+
 import React, { useEffect, useRef } from "react";
 import IconButton from '@mui/material/IconButton';
 import MicIcon from '@mui/icons-material/Mic';

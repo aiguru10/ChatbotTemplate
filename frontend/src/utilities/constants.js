@@ -122,7 +122,7 @@ export const ALLOW_VIDEO_PREVIEW = true; // Set to true to enable video preview
 export const ALLOW_CHAT_HISTORY = true; // Set to true to enable chat history
 // --------------------------------------------------------------------------------------------------------//
 // Styling under work, would reccomend keeping it false for now
-export const ALLOW_FAQ = true; // Set to true to enable the FAQs to be visible in Chat body 
+export const ALLOW_FAQ = false; // Set to true to enable the FAQs to be visible in Chat body 
 
 // VERY IMPORTANT
 // (If there is any)REMOVE THE POST PROCESSING IN SPEECH RECOGNITION TO DETECT CALVIN AS KELYVIN IN SPEECH RECOGNITION COMPONENT

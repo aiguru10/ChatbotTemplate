@@ -6,11 +6,12 @@ import { useMessage } from "../contexts/MessageContext";
 import createMessageBlock from "../utilities/createMessageBlock";
 import ReactMarkdown from "react-markdown";
 
-const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
+const StreamingMessage = ({ initialMessage, processing, setProcessing, handleBotResponse }) => {
   const [responses, setResponses] = useState([]);
   const ws = useRef(null);
   const messageBuffer = useRef("");
   const { messageList, addMessage } = useMessage();
+  const responsesRef = useRef(responses); // Add ref to store responses
 
   useEffect(() => {
     ws.current = new WebSocket(WEBSOCKET_API);
@@ -36,10 +37,15 @@ const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
         if (parsedData.type === "end") {
           setProcessing(false);
           console.log("End of conversation");
+          appendBotResponse();
         }
-
+        
         if (parsedData.type === "delta") {
-          setResponses((prev) => [...prev, parsedData.text]);
+          setResponses((prev) => {
+            const newResponses = [...prev, parsedData.text];
+            responsesRef.current = newResponses;
+            return newResponses;
+          });
         }
 
         messageBuffer.current = "";
@@ -74,20 +80,11 @@ const StreamingMessage = ({ initialMessage, processing, setProcessing }) => {
     };
   }, [initialMessage, setProcessing]);
 
-  useEffect(() => {
-    if (!processing) {
-      const finalMessage = responses.join("");
-      const botMessageBlock = createMessageBlock(
-        finalMessage,
-        "BOT",
-        "TEXT",
-        "SENT"
-      );
-      addMessage(botMessageBlock);
-      console.log("Bot message added to message list");
-      console.log("Message list: ", messageList);
-    }
-  }, [processing]);
+  // This function just sends the bot message to the chat bosy to be appended to the message list
+  const appendBotResponse = () => {
+    const finalMessage = responsesRef.current.join("");
+      handleBotResponse(finalMessage);
+  }
 
   return (
     <Grid container direction="row" justifyContent="flex-start" alignItems="flex-end">

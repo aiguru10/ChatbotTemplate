@@ -28,6 +28,17 @@ function ChatBody({ onFileUpload }) {
     }
   };
 
+  // This function recieves the bot response 
+  const handleBotResponse = (response) => {
+    const botMessageBlock = createMessageBlock(
+      response,
+      "BOT",
+      "TEXT",
+      "SENT"
+    );
+    addMessage(botMessageBlock)
+  }
+
   const handleSendMessage = (message) => {
     setProcessing(true);
     const newMessageBlock = createMessageBlock(message, 'USER', 'TEXT', 'SENT');
@@ -82,27 +93,45 @@ function ChatBody({ onFileUpload }) {
             {msg.sentBy === 'USER' && msg.type === 'TEXT' ? (
               <>
                 <UserReply message={msg.message} />
-                <StreamingMessage initialMessage={msg.message} setProcessing={setProcessing} processing={processing} />
+                <StreamingMessage initialMessage={msg.message} setProcessing={setProcessing} processing={processing} handleBotResponse={handleBotResponse}/>
               </>
             ) : msg.type === 'FILE' && msg.state === 'RECEIVED' ? (
-              <BotFileCheckReply messageId={index} />
+              <BotFileCheckReply messageId={index} setProcessing={setProcessing} processing={processing} />
             ) : null}
           </Box>
         ))}
         <div ref={messagesEndRef} />
       </Box>
 
-      <Box display='flex' justifyContent='space-between' alignItems='flex-end' sx={{ flexShrink: 0 }}>
-        <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? 'flex' : 'none' }}>
+      <Grid container justifyContent="space-between" alignItems="flex-end">
+          <Grid item>
+            <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? 'flex' : 'none' }}>
+              <SpeechRecognitionComponent setMessage={setMessage} getMessage={() => message} />
+            </Box>
+          </Grid>
+          <Grid item>
+            <Box sx={{ display: ALLOW_FILE_UPLOAD ? 'flex' : 'none' }}>
+              <Attachment onFileUploadComplete={handleFileUploadComplete} />
+            </Box>
+          </Grid>
+        <Grid item xs>
+          <Box sx={{ width: '100%' ,  ml: { xs: 0, sm: 2 }}}>
+            <ChatInput onSendMessage={handleSendMessage} processing={processing} message={message} setMessage={setMessage} />
+          </Box>
+        </Grid>
+    </Grid>
+
+      {/* <Box display='flex' justifyContent='space-between' alignItems='flex-end' sx={{ flexShrink: 0 }} backgroundColor="red">
+        <Box sx={{ display: ALLOW_VOICE_RECOGNITION ? 'flex' : 'none' }} backgroundColor="blue">
           <SpeechRecognitionComponent setMessage={setMessage} getMessage={() => message} />
         </Box>
-        <Box sx={{ display: ALLOW_FILE_UPLOAD ? 'flex' : 'none' }}>
+        <Box sx={{ display: ALLOW_FILE_UPLOAD ? 'flex' : 'none' }} backgroundColor="pink">
           <Attachment onFileUploadComplete={handleFileUploadComplete} />
         </Box>
-        <Box sx={{ width: '100%' }} ml={2}>
+        <Box sx={{ width: '100%' }} ml={2} backgroundColor="yellow">
           <ChatInput onSendMessage={handleSendMessage} processing={processing} message={message} setMessage={setMessage} />
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
