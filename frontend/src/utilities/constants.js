@@ -26,7 +26,7 @@ export const USERMESSAGE_BACKGROUND = "#FFEFCA"; // Background color for message
 // Text Constants
 export const TEXT = {
   EN: {
-    APP_NAME: "Chatbot Template App",
+    APP_NAME: "Bills easy to understand",
     APP_ASSISTANT_NAME: "GenAI Bot",
     ABOUT_US_TITLE: "About us",
     ABOUT_US: "Welcome to the GenAI chat bot! We're here to assist to quickly access relevant information.",
@@ -38,7 +38,7 @@ export const TEXT = {
       "What is the capital of France and its population?",
       "What is the weather like in New York?"
     ],
-    CHAT_HEADER_TITLE: "Sample AI Chat Assistant",
+    CHAT_HEADER_TITLE: "Simplifying Bills for Kids",
     CHAT_INPUT_PLACEHOLDER: "Type a Query...",
     HELPER_TEXT: "Cannot send empty message",
     SPEECH_RECOGNITION_START: "Start Listening",
@@ -106,13 +106,13 @@ export const WEBSOCKET_API = process.env.REACT_APP_WEBSOCKET_API; // URL for the
 // --------------------------------------------------------------------------------------------------------//
 
 // Features
-export const ALLOW_FILE_UPLOAD = false; // Set to true to enable file upload feature
+export const ALLOW_FILE_UPLOAD = true; // Set to true to enable file upload feature
 export const ALLOW_VOICE_RECOGNITION = true; // Set to true to enable voice recognition feature
 
-export const ALLOW_MULTLINGUAL_TOGGLE = true; // Set to true to enable multilingual support
-export const ALLOW_LANDING_PAGE = true; // Set to true to enable the landing page
+export const ALLOW_MULTLINGUAL_TOGGLE = false; // Set to true to enable multilingual support
+export const ALLOW_LANDING_PAGE = false; // Set to true to enable the landing page
 
 // --------------------------------------------------------------------------------------------------------//
 // Styling under work, would reccomend keeping it false for now
 export const ALLOW_MARKDOWN_BOT = false; // Set to true to enable markdown support for bot messages
-export const ALLOW_FAQ = true; // Set to true to enable the FAQs to be visible in Chat body 
+export const ALLOW_FAQ = false; // Set to true to enable the FAQs to be visible in Chat body 

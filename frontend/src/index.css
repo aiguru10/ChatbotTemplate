@@ -256,3 +256,8 @@ p#USERCHATINPUT-helper-text {
   background-color: red;
   color: white;
 }
+
+.content {
+  max-width: 500px;
+  margin: auto;
+}
